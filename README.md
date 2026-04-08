@@ -1,7 +1,7 @@
 ketika awal setelah cloning dari github 
 
 step 1
-npm run install karena disini pake vite
+npm install karena disini pake vite
 
 step 2 
 composer install
