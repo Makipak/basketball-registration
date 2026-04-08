@@ -22,5 +22,9 @@ atur sesuain pake database apa mysql paling terus nama dbnya apa
 step 5
 php artisan migrate
 
-terakhir jalanin projeknya pake 
-composer run dev
+terakhir jalanin projeknya pake dua terminal 
+php artisan serve
+
+sama 
+
+npm run dev
