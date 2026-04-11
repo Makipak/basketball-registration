@@ -23,99 +23,133 @@ export default function Login({
     canRegister,
 }: Props) {
     return (
-        <>
-            <Head title="Log in" />
+        /* BACKROUND JADI PUTIH BERSIH */
+        <div className="bg-white min-h-screen flex flex-col justify-center selection:bg-orange-500 p-6">
+            <Head title="Log In" />
 
-            <Form
-                {...store.form()}
-                resetOnSuccess={['password']}
-                className="flex flex-col gap-6"
-            >
-                {({ processing, errors }) => (
-                    <>
-                        <div className="grid gap-6">
-                            <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    required
-                                    autoFocus
-                                    tabIndex={1}
-                                    autoComplete="email"
-                                    placeholder="email@example.com"
-                                />
-                                <InputError message={errors.email} />
-                            </div>
-
-                            <div className="grid gap-2">
-                                <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
-                                    {canResetPassword && (
-                                        <TextLink
-                                            href={request()}
-                                            className="ml-auto text-sm"
-                                            tabIndex={5}
-                                        >
-                                            Forgot password?
-                                        </TextLink>
-                                    )}
-                                </div>
-                                <PasswordInput
-                                    id="password"
-                                    name="password"
-                                    required
-                                    tabIndex={2}
-                                    autoComplete="current-password"
-                                    placeholder="Password"
-                                />
-                                <InputError message={errors.password} />
-                            </div>
-
-                            <div className="flex items-center space-x-3">
-                                <Checkbox
-                                    id="remember"
-                                    name="remember"
-                                    tabIndex={3}
-                                />
-                                <Label htmlFor="remember">Remember me</Label>
-                            </div>
-
-                            <Button
-                                type="submit"
-                                className="mt-4 w-full"
-                                tabIndex={4}
-                                disabled={processing}
-                                data-test="login-button"
-                            >
-                                {processing && <Spinner />}
-                                Log in
-                            </Button>
-                        </div>
-
-                        {canRegister && (
-                            <div className="text-center text-sm text-muted-foreground">
-                                Don't have an account?{' '}
-                                <TextLink href={register()} tabIndex={5}>
-                                    Sign up
-                                </TextLink>
-                            </div>
-                        )}
-                    </>
-                )}
-            </Form>
-
-            {status && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
-                    {status}
+            <div className="w-full max-w-sm mx-auto space-y-10 relative">
+                {/* HEADLINE SECTION */}
+                <div className="flex flex-col items-center text-center">
+                    <div className="h-1.5 w-12 bg-blue-600 mb-6"></div>
+                    <h1 className="text-4xl font-black text-slate-900 uppercase italic tracking-tighter leading-none">
+                        PLAYER <span className="text-blue-600 text-3xl">LOGIN</span>
+                    </h1>
+                    <p className="mt-3 text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">Access Your Academy Dashboard</p>
                 </div>
-            )}
-        </>
+
+                <Form
+                    {...store.form()}
+                    resetOnSuccess={['password']}
+                    className="flex flex-col gap-6"
+                >
+                    {({ processing, errors }) => (
+                        <>
+                            <div className="grid gap-5">
+                                {/* EMAIL ADDRESS */}
+                                <div className="grid gap-2">
+                                    <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 ml-1" htmlFor="email">
+                                        Email Address
+                                    </Label>
+                                    <Input
+                                        id="email"
+                                        /* Styling input putih: bg-slate-50 & border-slate-200 */
+                                        className="bg-slate-50 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-orange-500 text-slate-900 placeholder:text-slate-300 h-12 transition-all duration-300"
+                                        type="email"
+                                        name="email"
+                                        required
+                                        autoFocus
+                                        tabIndex={1}
+                                        autoComplete="email"
+                                        placeholder="your@email.com"
+                                    />
+                                    <InputError message={errors.email} className="mt-1 text-[10px] font-bold uppercase italic text-red-500" />
+                                </div>
+
+                                {/* PASSWORD */}
+                                <div className="grid gap-2">
+                                    <div className="flex items-center justify-between ml-1">
+                                        <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500" htmlFor="password">
+                                            Password
+                                        </Label>
+                                        {canResetPassword && (
+                                            <TextLink
+                                                href={request()}
+                                                className="text-[10px] font-bold text-blue-500 hover:text-slate-900 uppercase tracking-wider transition-colors"
+                                                tabIndex={5}
+                                            >
+                                                Forgot?
+                                            </TextLink>
+                                        )}
+                                    </div>
+                                    <PasswordInput
+                                        id="password"
+                                        className="bg-slate-50 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-orange-500 text-slate-900 placeholder:text-slate-300 h-12 transition-all duration-300"
+                                        name="password"
+                                        required
+                                        tabIndex={2}
+                                        autoComplete="current-password"
+                                        placeholder="••••••••"
+                                    />
+                                    <InputError message={errors.password} className="mt-1 text-[10px] font-bold uppercase italic text-red-500" />
+                                </div>
+
+                                {/* REMEMBER ME */}
+                                <div className="flex items-center space-x-3 group cursor-pointer w-fit ml-1">
+                                    <Checkbox
+                                        id="remember"
+                                        name="remember"
+                                        tabIndex={3}
+                                        /* Checkbox disesuaikan warna bordernya */
+                                        className="border-slate-300 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
+                                    />
+                                    <Label 
+                                        htmlFor="remember" 
+                                        className="text-[11px] font-bold text-slate-500 group-hover:text-slate-900 cursor-pointer uppercase tracking-widest transition-colors"
+                                    >
+                                        Keep me logged in
+                                    </Label>
+                                </div>
+
+                                {/* LOGIN BUTTON */}
+                                <Button
+                                    type="submit"
+                                    className="mt-4 w-full bg-orange-600 hover:bg-orange-500 text-white font-black uppercase tracking-[0.3em] text-xs h-14 rounded-none transition-all duration-500 active:scale-[0.97] shadow-lg shadow-slate-200"
+                                    tabIndex={4}
+                                    disabled={processing}
+                                >
+                                    {processing ? <Spinner className="mr-2" /> : null}
+                                    Log In
+                                </Button>
+                            </div>
+
+                            {canRegister && (
+                                <div className="text-center pt-4">
+                                    <p className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">
+                                        New Architect?{' '}
+                                        <TextLink 
+                                            href={register()} 
+                                            tabIndex={5}
+                                            className="text-blue-600 hover:text-orange-500 font-black transition-colors underline underline-offset-4 decoration-blue-600/20"
+                                        >
+                                            CREATE ACCOUNT
+                                        </TextLink>
+                                    </p>
+                                </div>
+                            )}
+                        </>
+                    )}
+                </Form>
+
+                {status && (
+                    <div className="mt-4 p-4 bg-green-50 border-l-4 border-green-500 text-[10px] font-black uppercase tracking-widest text-green-700">
+                        {status}
+                    </div>
+                )}
+            </div>
+        </div>
     );
 }
 
 Login.layout = {
-    title: 'Log in to your account',
-    description: 'Enter your email and password below to log in',
+    title: 'Login',
 };

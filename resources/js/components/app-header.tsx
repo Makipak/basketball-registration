@@ -1,247 +1,131 @@
-import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
-import AppLogo from '@/components/app-logo';
-import AppLogoIcon from '@/components/app-logo-icon';
+import { Link } from '@inertiajs/react';
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuList,
-    navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from '@/components/ui/sheet';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { UserMenuContent } from '@/components/user-menu-content';
-import { useCurrentUrl } from '@/hooks/use-current-url';
-import { useInitials } from '@/hooks/use-initials';
-import { cn, toUrl } from '@/lib/utils';
-import { dashboard } from '@/routes';
-import type { BreadcrumbItem, NavItem } from '@/types';
+import type { BreadcrumbItem } from '@/types';
+import { useState } from 'react';
+import { Menu, X, UserCircle, ArrowRight } from 'lucide-react';
 
-type Props = {
-    breadcrumbs?: BreadcrumbItem[];
-};
+export function AppHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItem[] }) {
+    const [isOpen, setIsOpen] = useState(false);
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-];
-
-const rightNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
-];
-
-const activeItemStyles =
-    'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100';
-
-export function AppHeader({ breadcrumbs = [] }: Props) {
-    const page = usePage();
-    const { auth } = page.props;
-    const getInitials = useInitials();
-    const { isCurrentUrl, whenCurrentUrl } = useCurrentUrl();
+    const navItems = [
+        { name: 'Home', href: '/' },
+        { name: 'Schedule', href: '/schedule' },
+        { name: 'Coach', href: '/coach' },
+        { name: 'Program', href: '/program' },
+        { name: 'About', href: '/about' },
+        { name: 'FAQ', href: '/faq' },
+    ];
 
     return (
         <>
-            <div className="border-b border-sidebar-border/80">
-                <div className="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
-                    {/* Mobile Menu */}
-                    <div className="lg:hidden">
-                        <Sheet>
-                            <SheetTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="mr-2 h-[34px] w-[34px]"
-                                >
-                                    <Menu className="h-5 w-5" />
-                                </Button>
-                            </SheetTrigger>
-                            <SheetContent
-                                side="left"
-                                className="flex h-full w-64 flex-col items-stretch justify-between bg-sidebar"
-                            >
-                                <SheetTitle className="sr-only">
-                                    Navigation menu
-                                </SheetTitle>
-                                <SheetHeader className="flex justify-start text-left">
-                                    <AppLogoIcon className="h-6 w-6 fill-current text-black dark:text-white" />
-                                </SheetHeader>
-                                <div className="flex h-full flex-1 flex-col space-y-4 p-4">
-                                    <div className="flex h-full flex-col justify-between text-sm">
-                                        <div className="flex flex-col space-y-4">
-                                            {mainNavItems.map((item) => (
-                                                <Link
-                                                    key={item.title}
-                                                    href={item.href}
-                                                    className="flex items-center space-x-2 font-medium"
-                                                >
-                                                    {item.icon && (
-                                                        <item.icon className="h-5 w-5" />
-                                                    )}
-                                                    <span>{item.title}</span>
-                                                </Link>
-                                            ))}
-                                        </div>
-
-                                        <div className="flex flex-col space-y-4">
-                                            {rightNavItems.map((item) => (
-                                                <a
-                                                    key={item.title}
-                                                    href={toUrl(item.href)}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex items-center space-x-2 font-medium"
-                                                >
-                                                    {item.icon && (
-                                                        <item.icon className="h-5 w-5" />
-                                                    )}
-                                                    <span>{item.title}</span>
-                                                </a>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </SheetContent>
-                        </Sheet>
-                    </div>
-
-                    <Link
-                        href={dashboard()}
-                        prefetch
-                        className="flex items-center space-x-2"
-                    >
-                        <AppLogo />
+            <header className="sticky top-0 z-[100] w-full border-b border-white/5 bg-white/80 backdrop-blur-md">
+                <div className="flex h-16 items-center justify-between px-4 md:px-10 lg:px-16">
+                    
+                    {/* LOGO - More compact on mobile */}
+                    <Link href="/" className="flex items-center gap-2 md:gap-3 group shrink-0">
+                        <img src="/images/logo/roringlogo.png" alt="Logo" className="h-8 md:h-10 w-auto object-contain" />
+                        <div className="flex flex-col">
+                            <span className="text-sm md:text-lg text-black font-black tracking-tighter leading-none uppercase italic">
+                                Roring<span className="text-orange-500">basketball</span>
+                            </span>
+                            {/* Hidden on very small screens to save space */}
+                            <span className="hidden xs:block text-[7px] text-gray-500 font-bold tracking-[0.4em] uppercase mt-0.5">Academy</span>
+                        </div>
                     </Link>
 
-                    {/* Desktop Navigation */}
-                    <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
-                        <NavigationMenu className="flex h-full items-stretch">
-                            <NavigationMenuList className="flex h-full items-stretch space-x-2">
-                                {mainNavItems.map((item, index) => (
-                                    <NavigationMenuItem
-                                        key={index}
-                                        className="relative flex h-full items-center"
-                                    >
-                                        <Link
-                                            href={item.href}
-                                            className={cn(
-                                                navigationMenuTriggerStyle(),
-                                                whenCurrentUrl(
-                                                    item.href,
-                                                    activeItemStyles,
-                                                ),
-                                                'h-9 cursor-pointer px-3',
-                                            )}
-                                        >
-                                            {item.icon && (
-                                                <item.icon className="mr-2 h-4 w-4" />
-                                            )}
-                                            {item.title}
-                                        </Link>
-                                        {isCurrentUrl(item.href) && (
-                                            <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
-                                        )}
-                                    </NavigationMenuItem>
-                                ))}
-                            </NavigationMenuList>
-                        </NavigationMenu>
-                    </div>
+                    {/* DESKTOP NAV */}
+                    <nav className="hidden lg:flex items-center gap-8">
+                        {navItems.map((item) => (
+                            <Link key={item.name} href={item.href} className="text-[10px] font-bold text-black hover:text-orange-500 transition-colors uppercase tracking-[0.2em]">
+                                {item.name}
+                            </Link>
+                        ))}
+                    </nav>
 
-                    <div className="ml-auto flex items-center space-x-2">
-                        <div className="relative flex items-center space-x-1">
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="group h-9 w-9 cursor-pointer"
+                    {/* ACTIONS */}
+                    <div className="flex items-center gap-2 md:gap-4">
+                        {/* Desktop Only Login */}
+                        <Link 
+                            href="/login" 
+                            className="hidden lg:flex items-center gap-2 px-3 py-2 text-[10px] font-black text-black uppercase tracking-widest hover:text-orange-500 transition-all"
+                        >
+                            <UserCircle size={16} />
+                            Login
+                        </Link>
+
+                        {/* Join Button - Adjusted size for mobile */}
+                        <Link 
+                            href="/register" 
+                            className="bg-orange-500 hover:bg-orange-600 px-4 md:px-6 py-2 md:py-2.5 rounded-xl font-black text-[9px] md:text-[10px] text-white uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-orange-500/20"
+                        >
+                            Join Member
+                        </Link>
+
+                        {/* HAMBURGER */}
+                        <button 
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="lg:hidden p-2 text-black outline-none"
+                        >
+                            {isOpen ? <X size={24} className="text-orange-500" /> : <Menu size={24} />}
+                        </button>
+                    </div>
+                </div>
+
+                {/* MOBILE MENU */}
+                <div className={`
+                    absolute top-[64px] left-0 w-full overflow-y-auto transition-all duration-500 ease-in-out lg:hidden bg-[#020617]
+                    ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 invisible'}
+                `}>
+                    <div className="absolute inset-0 bg-[#020617]/98 bg-[radial-gradient(circle_at_top_right,_#f9731615,_transparent_50%)] -z-10"></div>
+                    
+                    <nav className="relative flex flex-col p-6 gap-4">
+                        {/* Primary Mobile Action: Login */}
+                        <div className={`transition-all duration-500 delay-75 ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
+                            <Link 
+                                href="/login"
+                                onClick={() => setIsOpen(false)}
+                                className="w-full py-4 rounded-2xl bg-white/2 border border-white/10 text-white font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 active:bg-white/10"
                             >
-                                <Search className="!size-5 opacity-80 group-hover:opacity-100" />
-                            </Button>
-                            <div className="ml-1 hidden gap-1 lg:flex">
-                                {rightNavItems.map((item) => (
-                                    <Tooltip key={item.title}>
-                                        <TooltipTrigger>
-                                            <a
-                                                href={toUrl(item.href)}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="group inline-flex h-9 w-9 items-center justify-center rounded-md bg-transparent p-0 text-sm font-medium text-accent-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-                                            >
-                                                <span className="sr-only">
-                                                    {item.title}
-                                                </span>
-                                                {item.icon && (
-                                                    <item.icon className="size-5 opacity-80 group-hover:opacity-100" />
-                                                )}
-                                            </a>
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                            <p>{item.title}</p>
-                                        </TooltipContent>
-                                    </Tooltip>
+                                <UserCircle size={20} className="text-orange-500" />
+                                Login to Account
+                            </Link>
+                        </div>
+
+                        {/* Nav Links */}
+                        <div className="flex flex-col gap-2 mt-4">
+                            {navItems.map((item, idx) => (
+                                <Link 
+                                    key={item.name} 
+                                    href={item.href} 
+                                    onClick={() => setIsOpen(false)}
+                                    className={`py-3 text-xl font-black text-white uppercase tracking-tighter hover:text-orange-500 transition-all flex items-center justify-between border-b border-white/5 transform ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}`}
+                                    style={{ transitionDelay: `${(idx + 2) * 50}ms` }}
+                                >
+                                    <span className="italic">{item.name}</span>
+                                    <ArrowRight size={18} className="text-white/20 group-hover:text-orange-500" />
+                                </Link>
+                            ))}
+                        </div>
+
+                        {/* Mobile Footer */}
+                        <div className={`mt-8 pt-6 flex flex-col gap-4 transition-all duration-700 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
+                            <div className="flex gap-6 justify-center">
+                                {['Instagram', 'Youtube', 'Tiktok'].map((soc) => (
+                                    <span key={soc} className="text-[10px] font-black text-gray-500 uppercase tracking-widest hover:text-white transition-colors">
+                                        {soc}
+                                    </span>
                                 ))}
                             </div>
                         </div>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button
-                                    variant="ghost"
-                                    className="size-10 rounded-full p-1"
-                                >
-                                    <Avatar className="size-8 overflow-hidden rounded-full">
-                                        <AvatarImage
-                                            src={auth.user?.avatar}
-                                            alt={auth.user?.name}
-                                        />
-                                        <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                                            {getInitials(auth.user?.name ?? '')}
-                                        </AvatarFallback>
-                                    </Avatar>
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56" align="end">
-                                {auth.user && (
-                                    <UserMenuContent user={auth.user} />
-                                )}
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
+                    </nav>
                 </div>
-            </div>
-            {breadcrumbs.length > 1 && (
-                <div className="flex w-full border-b border-sidebar-border/70">
-                    <div className="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl">
-                        <Breadcrumbs breadcrumbs={breadcrumbs} />
-                    </div>
-                </div>
+            </header>
+
+            {isOpen && (
+                <div 
+                    className="fixed inset-0 z-[90] bg-black/40 backdrop-blur-sm lg:hidden" 
+                    onClick={() => setIsOpen(false)}
+                />
             )}
         </>
     );
