@@ -202,6 +202,7 @@ export default function About({ breadcrumbs }: AboutProps) {
                                 </div>
                             ))}
                         </div>
+                        
                     </section>
 
                     {/* SECTION 7: CONTACT - BOLD FINALE */}

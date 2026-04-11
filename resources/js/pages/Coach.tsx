@@ -167,6 +167,7 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
                         <div className="absolute -bottom-10 -right-10 text-9xl font-black text-white/5 pointer-events-none uppercase italic">
                             Roring
                         </div>
+                        
                     </section>
 
                     <Footer />

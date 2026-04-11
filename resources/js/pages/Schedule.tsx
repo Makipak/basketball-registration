@@ -234,6 +234,7 @@ export default function Schedule({ breadcrumbs }: AppLayoutProps) {
                                 </div>
                             </div>
                         </div>
+                        
                     </section>
                     <Footer />
                 </div>

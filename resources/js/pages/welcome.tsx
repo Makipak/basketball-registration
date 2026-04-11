@@ -71,6 +71,7 @@ export default function Welcome({ breadcrumbs }: AppLayoutProps) {
                                 <p className="text-sm md:text-lg text-gray-300 mb-10 max-w-lg leading-relaxed font-medium">
                                     Program pelatihan basket intensif dengan kurikulum terukur untuk pemula hingga profesional. Dibimbing oleh pelatih bersertifikasi internasional.
                                 </p>
+                                
                                 <div className="flex flex-col sm:flex-row gap-4">
                                     <Link 
                                         href="/program/member" 

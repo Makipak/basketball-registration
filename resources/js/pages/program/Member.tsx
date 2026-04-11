@@ -24,6 +24,7 @@ export default function MemberRegistration() {
         payment_proof: null as File | null,
     });
 
+    
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {

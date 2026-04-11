@@ -124,6 +124,7 @@ export default function FAQ({ breadcrumbs }: FAQProps) {
                                 </button>
                             </div>
                         </div>
+                        
                     </section>
 
                     <Footer />
