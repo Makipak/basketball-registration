@@ -35,14 +35,11 @@ export function AppHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItem[]
                     
                     {/* LOGO - More compact on mobile */}
                     <Link href="/" className="flex items-center gap-2 md:gap-3 group shrink-0">
-                        <img src="/images/logo/Roar-B.png" alt="Logo" className="h-8 md:h-10 w-auto object-contain" />
-                        <div className="flex flex-col">
-                            <span className="text-sm md:text-lg text-black font-black tracking-tighter leading-none uppercase italic">
-                                Roar<span className="text-orange-500">basketball</span>
-                            </span>
-                            {/* Hidden on very small screens to save space */}
-                            <span className="hidden xs:block text-[7px] text-gray-500 font-bold tracking-[0.4em] uppercase mt-0.5">Academy</span>
-                        </div>
+                        <img src="/images/logo/Roar-B.png" alt="Logo Roar Basketball Championship" className="h-8 md:h-10 w-auto object-contain" />
+                        <span className="text-sm md:text-lg text-black font-black tracking-tighter leading-none uppercase italic">
+                            Roar<span className="text-orange-500">basketball</span>
+                            <span className="block text-[8px] md:text-[10px] not-italic font-bold tracking-[0.3em] text-black/60 mt-1">Championship</span>
+                        </span>
                     </Link>
 
                     {/* DESKTOP NAV */}

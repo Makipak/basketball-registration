@@ -37,16 +37,16 @@ type WelcomeProps = AppLayoutProps & {
 // ⚠️ DATA DUMMY — dipakai selama backend belum terhubung.
 // Hapus / abaikan setelah props `instagramPosts` dikirim dari server.
 const dummyPosts: InstagramPost[] = [
-    { id: '1', media_type: 'IMAGE', media_url: '/images/news/news-1.jpg', permalink: 'https://instagram.com/roarbasketball', timestamp: '2026-04-12T09:00:00Z', caption: 'Persiapan menuju National Championship 2026. Seleksi ketat sudah dimulai, siapa yang siap tampil?' },
-    { id: '2', media_type: 'VIDEO', media_url: '/images/news/news-2.jpg', thumbnail_url: '/images/news/news-2.jpg', permalink: 'https://instagram.com/roarbasketball', timestamp: '2026-04-08T09:00:00Z', caption: 'Highlight latihan intensif minggu ini. Drill dribbling dan shooting tanpa henti.' },
-    { id: '3', media_type: 'CAROUSEL_ALBUM', media_url: '/images/news/news-3.jpg', permalink: 'https://instagram.com/roarbasketball', timestamp: '2026-04-03T09:00:00Z', caption: 'Momen seru di National League 2026. Terima kasih untuk semua dukungan!' },
-    { id: '4', media_type: 'IMAGE', media_url: '/images/news/news-2.jpg', permalink: 'https://instagram.com/roarbasketball', timestamp: '2026-03-28T09:00:00Z', caption: 'Selamat kepada para juara yang sudah bekerja keras sepanjang musim.' },
-    { id: '5', media_type: 'VIDEO', media_url: '/images/news/news-3.jpg', thumbnail_url: '/images/news/news-3.jpg', permalink: 'https://instagram.com/roarbasketball', timestamp: '2026-03-21T09:00:00Z', caption: 'Behind the scene sesi latihan pagi bersama Coach Fictor.' },
-    { id: '6', media_type: 'IMAGE', media_url: '/images/news/news-1.jpg', permalink: 'https://instagram.com/roarbasketball', timestamp: '2026-03-15T09:00:00Z', caption: 'Pendaftaran member baru batch berikutnya sudah dibuka. Cek link di bio.' },
+    { id: '1', media_type: 'IMAGE', media_url: '/images/news/news-1.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-04-12T09:00:00Z', caption: 'Persiapan menuju National Championship 2026. Seleksi ketat sudah dimulai, siapa yang siap tampil?' },
+    { id: '2', media_type: 'VIDEO', media_url: '/images/news/news-2.jpg', thumbnail_url: '/images/news/news-2.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-04-08T09:00:00Z', caption: 'Highlight latihan intensif Roar Basketball Championship minggu ini. Drill dribbling dan shooting tanpa henti.' },
+    { id: '3', media_type: 'CAROUSEL_ALBUM', media_url: '/images/news/news-3.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-04-03T09:00:00Z', caption: 'Momen seru di National League 2026. Terima kasih untuk semua dukungan!' },
+    { id: '4', media_type: 'IMAGE', media_url: '/images/news/news-2.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-03-28T09:00:00Z', caption: 'Selamat kepada para juara yang sudah bekerja keras sepanjang musim.' },
+    { id: '5', media_type: 'VIDEO', media_url: '/images/news/news-3.jpg', thumbnail_url: '/images/news/news-3.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-03-21T09:00:00Z', caption: 'Behind the scene sesi latihan pagi bersama Coach Fictor.' },
+    { id: '6', media_type: 'IMAGE', media_url: '/images/news/news-1.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-03-15T09:00:00Z', caption: 'Pendaftaran member baru Roar Basketball Championship batch berikutnya sudah dibuka. Cek link di bio.' },
 ];
 
-const IG_HANDLE = '@roarbasketball';
-const IG_URL = 'https://instagram.com/roarbasketball'; // ⚠️ GANTI dengan akun asli
+const IG_HANDLE = '@roarbasketball_championship';
+const IG_URL = 'https://instagram.com/roarbasketball_championship'; // ⚠️ GANTI dengan akun asli
 
 const formatDate = (iso: string) =>
     new Date(iso).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });

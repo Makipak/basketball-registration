@@ -8,9 +8,10 @@ export function Footer() {
                     {/* Branding */}
                     <div className="col-span-1 md:col-span-2">
                         <div className="flex items-center gap-3 mb-6">
-                            <img src="/images/logo/Roar-P.png" className="h-10 w-auto" alt="Logo" />
-                            <span className="text-xl font-bold tracking-tighter uppercase text-white">
+                            <img src="/images/logo/Roar-P.png" className="h-10 w-auto" alt="Logo Roar Basketball Championship" />
+                            <span className="text-xl font-bold tracking-tighter uppercase text-white leading-none">
                                 Roar<span className="text-orange-500">basketball</span>
+                                <span className="block text-[10px] tracking-[0.3em] text-white/70 mt-1">Championship</span>
                             </span>
                         </div>
                         <p className="text-blue-100 text-sm max-w-sm mb-8 font-medium leading-relaxed">

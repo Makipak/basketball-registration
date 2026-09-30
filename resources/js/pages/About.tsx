@@ -66,17 +66,17 @@ export default function About({ breadcrumbs }: AboutProps) {
         { value: '150+', label: 'Atlet Binaan', icon: <Users size={32} /> },
     ];
 
-    // ⚠️ GANTI link dengan akun sosial media asli
-    const socialLinks = [
-        { name: 'Instagram', handle: '@roarbasketball', href: 'https://instagram.com/roarbasketball', icon: <Instagram size={24} /> },
-        { name: 'YouTube', handle: 'Roar Basketball', href: 'https://youtube.com/@roarbasketball', icon: <Youtube size={24} /> },
-        { name: 'TikTok', handle: '@roarbasketball', href: 'https://tiktok.com/@roarbasketball', icon: <Music2 size={24} /> },
-        { name: 'Facebook', handle: 'Roar Basketball', href: 'https://facebook.com/roarbasketball', icon: <Facebook size={24} /> },
-    ];
+    // GANTI link dengan akun sosial media asli
+        const socialLinks = [
+            { name: 'Instagram', handle: 'Roar Basketball Championship', href: 'https://instagram.com/roarbasketball_championship', icon: <Instagram size={24} /> },
+            { name: 'YouTube', handle: 'Roar Basketball Championship', href: 'https://youtube.com/@roarbasketball_championship', icon: <Youtube size={24} /> },
+            { name: 'TikTok', handle: 'Roar Basketball Championship', href: 'https://tiktok.com/@roarbasketball_championship', icon: <Music2 size={24} /> },
+            { name: 'Facebook', handle: 'Roar Basketball Championship', href: 'https://facebook.com/roarbasketball_championship', icon: <Facebook size={24} /> },
+        ];
 
     return (
         <AppShell variant="header">
-            <Head title="About Us | RoarBasketball" />
+            <Head title="About Us | RoarBasketball Championship" />
             <AppHeader breadcrumbs={breadcrumbs} />
             <AppContent variant="header" className="p-0 overflow-x-hidden">
                 <div className="bg-[#020617] text-white font-sans selection:bg-orange-500 selection:text-white">
@@ -105,7 +105,8 @@ export default function About({ breadcrumbs }: AboutProps) {
                                 </div>
                                 <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter leading-[0.8] text-white mb-6">
                                     ROAR<br />
-                                    <span className="text-orange-500 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">BASKETBALL</span>
+                                    <span className="text-orange-500 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">BASKETBALL</span><br />
+                                    <span className="block mt-3 text-3xl md:text-5xl tracking-[0.15em] text-white">CHAMPIONSHIP</span>
                                 </h1>
                                 <div className="h-2 w-32 bg-orange-500 mb-6 shadow-[0_0_20px_rgba(249,115,22,0.6)]"></div>
                                 <p className="max-w-md text-gray-200 text-lg md:text-xl font-medium leading-relaxed italic opacity-90">
