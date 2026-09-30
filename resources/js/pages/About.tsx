@@ -29,7 +29,7 @@ export default function About({ breadcrumbs }: AboutProps) {
     
     const heroImages = [
         '/images/about/about-1.jpg',
-        '/images/about/about-2.jpg',
+        '/images/about/about-2.png',
         '/images/about/about-3.jpg',
     ];
     const [heroIndex, setHeroIndex] = useState(0);
