@@ -42,10 +42,10 @@ export default function About({ breadcrumbs }: AboutProps) {
     }, [heroImages.length]);
 
     const activities = [
-        { title: 'BE ACTIVE', desc: 'Talenta muda yang dinamis siap menghadapi tantangan global dengan program pelatihan yang terukur dan berkelanjutan.', img: '/images/activity/activity-1.jpg' },
-        { title: 'INTENSIVE DRILL', desc: 'Latihan fundamental untuk akurasi dan kontrol bola maksimal, mencakup dribbling, shooting, serta footwork dasar.', img: '/images/activity/activity-1.jpg' },
-        { title: 'TEAM WORK', desc: 'Membangun chemistry kuat di dalam dan luar lapangan melalui sesi diskusi strategi dan kegiatan bonding.', img: '/images/activity/activity-1.jpg' },
-        { title: 'GAME READY', desc: 'Kesiapan fisik dan mental untuk level turnamen tertinggi dengan simulasi pertandingan kompetitif.', img: '/images/activity/activity-1.jpg' },
+        { title: 'BE ACTIVE', desc: 'Talenta muda yang dinamis siap menghadapi tantangan global dengan program pelatihan yang terukur dan berkelanjutan.', img: '/images/activity/activity-1.jpeg' },
+        { title: 'INTENSIVE DRILL', desc: 'Latihan fundamental untuk akurasi dan kontrol bola maksimal, mencakup dribbling, shooting, serta footwork dasar.', img: '/images/activity/activity-2.jpg' },
+        { title: 'TEAM WORK', desc: 'Membangun chemistry kuat di dalam dan luar lapangan melalui sesi diskusi strategi dan kegiatan bonding.', img: '/images/activity/activity-3.jpg' },
+        { title: 'GAME READY', desc: 'Kesiapan fisik dan mental untuk level turnamen tertinggi dengan simulasi pertandingan kompetitif.', img: '/images/activity/activity-4.jpg' },
     ];
 
     const architects = [
@@ -327,9 +327,11 @@ export default function About({ breadcrumbs }: AboutProps) {
                                     JOIN THE<br /><span className="text-orange-500">TRIBE.</span>
                                 </h2>
                                 <div className="text-white space-y-4 text-xl font-medium mb-12 border-l-4 border-orange-500 pl-8 italic">
-                                    <p>Town Square Mezzanine Level 2</p>
-                                    <p>Jalan Hayam Wuruk No. 6, Surabaya, 60242</p>
-                                    <p className="pt-4 text-4xl font-black text-orange-400 not-italic">(031) 5632606</p>
+                                    <p>Ancol Hoops</p>
+                                    <p>Jl. Karang Bolong Raya No. 8, Ancol, Pademangan, Jakarta Utara 14430</p>
+                                    <p className="pt-4 text-4xl font-black text-orange-400 not-italic">
+                                        (+62) 822-6622-9901
+                                    </p>
                                 </div>
 
                                 {/* Sosial Media */}
@@ -370,7 +372,7 @@ export default function About({ breadcrumbs }: AboutProps) {
                                 <div className="bg-slate-100 p-4 rounded-2xl text-blue-700"><MapPin size={32} /></div>
                                 <div>
                                     <span className="text-orange-500 font-black uppercase tracking-widest text-[10px]">Our Basecamp</span>
-                                    <h4 className="text-slate-900 font-black text-xl italic uppercase">Surabaya, East Java - Indonesia</h4>
+                                    <h4 className="text-slate-900 font-black text-xl italic uppercase">Ancol Hoops, Jakarta - Indonesia</h4>
                                 </div>
                             </div>
                             <div className="h-12 w-[1px] bg-slate-200 hidden md:block"></div>
@@ -383,12 +385,13 @@ export default function About({ breadcrumbs }: AboutProps) {
 
                     <section className="h-[600px] w-full relative border-t-8 border-orange-500">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.567822453628!2d112.72314957591632!3d-7.289839492717596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb9003503247%3A0x6a0f4435948f6f5!2sSurabaya%20Town%20Square!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+                            src="https://www.google.com/maps?q=Ancol%20Hoops%2C%20Jakarta&output=embed"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
                             allowFullScreen
                             loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
                             title="Lokasi Roar Basketball"
                             className="w-full h-full grayscale-[50%] hover:grayscale-0 transition-all duration-1000"
                         />

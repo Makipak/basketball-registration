@@ -24,12 +24,12 @@ export default defineConfig({
     ],
 
     // 🔥 TAMBAHKAN INI
-    server: {
-        host: '0.0.0.0',
+        server: {
+        host: '127.0.0.1',
         port: 5173,
         strictPort: true,
         hmr: {
-            host: '172.20.10.4', // IP kamu
+            host: '127.0.0.1',
         },
     },
 });
