@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppShell } from '@/components/app-shell';
 import { AppHeader } from '@/components/app-header';
 import { AppContent } from '@/components/app-content';
@@ -11,7 +11,12 @@ import {
     Target,
     MapPin,
     Zap,
-    ChevronRight
+    ChevronRight,
+    Medal,
+    Instagram,
+    Youtube,
+    Facebook,
+    Music2,
 } from 'lucide-react';
 
 interface AboutProps {
@@ -21,6 +26,21 @@ interface AboutProps {
 export default function About({ breadcrumbs }: AboutProps) {
     const [activeActivity, setActiveActivity] = useState<number | null>(null);
 
+    
+    const heroImages = [
+        '/images/about/about-1.jpg',
+        '/images/about/about-2.jpg',
+        '/images/about/about-3.jpg',
+    ];
+    const [heroIndex, setHeroIndex] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setHeroIndex((prev) => (prev + 1) % heroImages.length);
+        }, 5000); // ganti foto tiap 5 detik
+        return () => clearInterval(timer);
+    }, [heroImages.length]);
+
     const activities = [
         { title: 'BE ACTIVE', desc: 'Talenta muda yang dinamis siap menghadapi tantangan global dengan program pelatihan yang terukur dan berkelanjutan.', img: '/images/activity/activity-1.jpg' },
         { title: 'INTENSIVE DRILL', desc: 'Latihan fundamental untuk akurasi dan kontrol bola maksimal, mencakup dribbling, shooting, serta footwork dasar.', img: '/images/activity/activity-1.jpg' },
@@ -29,10 +49,7 @@ export default function About({ breadcrumbs }: AboutProps) {
     ];
 
     const architects = [
-        { name: 'Richard Roring', role: 'Head Coach', img: '/images/team/team-1.jpg', quote: 'Disiplin adalah fondasi dari setiap kemenangan besar yang bertahan lama.' },
-        { name: 'Alvin Susanto', role: 'Asst. Coach', img: '/images/team/team-1.jpg', quote: 'Fundamental yang kuat akan membawa anda melampaui batas kemampuan fisik.' },
-        { name: 'Denny Sumargo', role: 'Technical Advisor', img: '/images/team/team-1.jpg', quote: 'Bola basket bukan hanya permainan, tapi tentang mentalitas juara sejati.' },
-        { name: 'Maria Selena', role: 'Public Relation', img: '/images/team/team-1.jpg', quote: 'Membangun koneksi dan sportivitas dalam ekosistem basket nasional.' },
+        { name: 'Fictor Roaring', role: 'Head Coach', img: '/images/team/team-1.jpg', quote: 'Disiplin adalah fondasi dari setiap kemenangan besar yang bertahan lama.' },
     ];
 
     const galleryItems = [...Array(10)].map((_, i) => ({
@@ -41,17 +58,42 @@ export default function About({ breadcrumbs }: AboutProps) {
         location: 'DBL Arena, Surabaya',
     }));
 
+    // ⚠️ GANTI angka di bawah ini sesuai data asli akademi
+    const achievementStats = [
+        { value: '25+', label: 'Total Kejuaraan', icon: <Trophy size={32} /> },
+        { value: '12', label: 'Juara 1', icon: <Medal size={32} /> },
+        { value: '8', label: 'Juara 2', icon: <Medal size={32} /> },
+        { value: '150+', label: 'Atlet Binaan', icon: <Users size={32} /> },
+    ];
+
+    // ⚠️ GANTI link dengan akun sosial media asli
+    const socialLinks = [
+        { name: 'Instagram', handle: '@roarbasketball', href: 'https://instagram.com/roarbasketball', icon: <Instagram size={24} /> },
+        { name: 'YouTube', handle: 'Roar Basketball', href: 'https://youtube.com/@roarbasketball', icon: <Youtube size={24} /> },
+        { name: 'TikTok', handle: '@roarbasketball', href: 'https://tiktok.com/@roarbasketball', icon: <Music2 size={24} /> },
+        { name: 'Facebook', handle: 'Roar Basketball', href: 'https://facebook.com/roarbasketball', icon: <Facebook size={24} /> },
+    ];
+
     return (
         <AppShell variant="header">
-            <Head title="About Us | RoringBasketball" />
+            <Head title="About Us | RoarBasketball" />
             <AppHeader breadcrumbs={breadcrumbs} />
             <AppContent variant="header" className="p-0 overflow-x-hidden">
                 <div className="bg-[#020617] text-white font-sans selection:bg-orange-500 selection:text-white">
 
-                    {/* SECTION 1: HERO */}
+                    {/* SECTION 1: HERO (auto crossfade) */}
                     <section className="relative h-screen flex items-center overflow-hidden">
                         <div className="absolute inset-0 z-0">
-                            <img src="/images/home/slide-3.jpg" className="w-full h-full object-cover scale-105 animate-slow-zoom" alt="Roring Basketball Hero" />
+                            {heroImages.map((src, i) => (
+                                <img
+                                    key={src}
+                                    src={src}
+                                    alt={`Roar Basketball Hero ${i + 1}`}
+                                    className={`absolute inset-0 w-full h-full object-cover scale-105 animate-slow-zoom transition-opacity duration-[1500ms] ease-in-out ${
+                                        i === heroIndex ? 'opacity-100' : 'opacity-0'
+                                    }`}
+                                />
+                            ))}
                             <div className="absolute inset-0 bg-gradient-to-l from-[#020617] via-[#020617]/60 to-transparent"></div>
                             <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent"></div>
                         </div>
@@ -59,10 +101,10 @@ export default function About({ breadcrumbs }: AboutProps) {
                             <div className="hidden md:block"></div>
                             <div className="text-left md:text-right flex flex-col items-start md:items-end justify-center">
                                 <div className="overflow-hidden mb-4">
-                                    <img src="/images/logo/roringlogo.png" className="h-28 md:h-44 w-auto animate-fade-in-up" alt="Logo" />
+                                    <img src="/images/logo/Roar-P.png" className="h-28 md:h-44 w-auto animate-fade-in-up" alt="Logo" />
                                 </div>
                                 <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter leading-[0.8] text-white mb-6">
-                                    RORING<br />
+                                    ROAR<br />
                                     <span className="text-orange-500 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">BASKETBALL</span>
                                 </h1>
                                 <div className="h-2 w-32 bg-orange-500 mb-6 shadow-[0_0_20px_rgba(249,115,22,0.6)]"></div>
@@ -71,15 +113,28 @@ export default function About({ breadcrumbs }: AboutProps) {
                                 </p>
                             </div>
                         </div>
+
+                        {/* Indikator titik */}
+                        <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+                            {heroImages.map((_, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => setHeroIndex(i)}
+                                    aria-label={`Foto ${i + 1}`}
+                                    className={`h-1.5 rounded-full transition-all duration-500 ${
+                                        i === heroIndex ? 'w-8 bg-orange-500' : 'w-3 bg-white/40 hover:bg-white/70'
+                                    }`}
+                                />
+                            ))}
+                        </div>
                     </section>
 
-                    {/* SECTION 2: VISION & MISSION */}
+                    {/* SECTION 2: VISION & MISSION (Community dihapus) */}
                     <section className="py-32 bg-white text-slate-900 rounded-t-[4rem] -mt-20 relative z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.2)]">
-                        <div className="container mx-auto px-6 grid md:grid-cols-3 gap-8">
+                        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-8 max-w-5xl">
                             {[
                                 { icon: <Target size={44} />, title: "The Vision", color: "text-orange-500", desc: "Menjadi pusat akademi basket paling berpengaruh yang menghasilkan atlet elit berstandar global." },
                                 { icon: <Trophy size={44} />, title: "Our Mission", color: "text-blue-600", desc: "Menggabungkan disiplin tinggi dengan kreativitas basket modern untuk melatih fisik dan intelegensi pemain." },
-                                { icon: <Users size={44} />, title: "Community", color: "text-slate-900", desc: "Menciptakan ekosistem dimana orang tua dan atlet tumbuh bersama dalam semangat sportivitas dan integritas." }
                             ].map((item, i) => (
                                 <div key={i} className="group p-12 rounded-[3rem] bg-slate-50 border border-slate-100 hover:bg-slate-900 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl">
                                     <div className={`${item.color} mb-8 group-hover:scale-110 group-hover:text-orange-500 transition-all duration-500`}>{item.icon}</div>
@@ -90,15 +145,46 @@ export default function About({ breadcrumbs }: AboutProps) {
                         </div>
                     </section>
 
+                    {/* SECTION 2B: JUMLAH KEJUARAAN */}
+                    <section className="py-20 md:py-28 bg-slate-950 relative overflow-hidden">
+                        <div className="absolute -top-32 -left-32 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl"></div>
+                        <div className="container mx-auto px-6 relative z-10">
+                            <div className="mb-12 md:mb-16 text-center">
+                                <span className="text-orange-500 font-black text-xs uppercase tracking-widest">Track Record</span>
+                                <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter mt-2">
+                                    JEJAK <span className="text-orange-500">KEJUARAAN</span>
+                                </h2>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                                {achievementStats.map((stat, i) => (
+                                    <div
+                                        key={i}
+                                        className="group p-6 md:p-10 rounded-[2rem] bg-white/5 border border-white/10 hover:bg-orange-500 hover:border-orange-500 transition-all duration-500 hover:-translate-y-2 text-center"
+                                    >
+                                        <div className="text-orange-500 group-hover:text-white flex justify-center mb-4 transition-colors">
+                                            {stat.icon}
+                                        </div>
+                                        <div className="text-5xl md:text-7xl font-black italic tracking-tighter leading-none">
+                                            {stat.value}
+                                        </div>
+                                        <p className="mt-3 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-gray-400 group-hover:text-white transition-colors">
+                                            {stat.label}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
                     {/* SECTION 3: VIDEO SHOWCASE */}
                     <section id="video-section" className="py-24 bg-slate-900 scroll-mt-20 overflow-hidden">
                         <div className="container mx-auto px-6">
-                            <div className="relative aspect-video rounded-[4rem] overflow-hidden group ring-1 ring-white/10 shadow-3xl cursor-pointer">
+                            <div className="relative aspect-video rounded-[4rem] overflow-hidden group ring-1 ring-white/10 shadow-2xl cursor-pointer">
                                 <img src="/images/video-thumb.jpg" className="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000" alt="Video Thumbnail" />
                                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                                     <div className="relative">
                                         <div className="absolute inset-0 bg-orange-500 rounded-full blur-2xl opacity-20 group-hover:opacity-60 animate-pulse"></div>
-                                        <button className="relative bg-orange-500 text-white w-28 h-28 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-12">
+                                        <button className="relative bg-orange-500 text-white w-28 h-28 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" aria-label="Putar video">
                                             <PlayCircle size={60} fill="currentColor" />
                                         </button>
                                     </div>
@@ -108,12 +194,12 @@ export default function About({ breadcrumbs }: AboutProps) {
                         </div>
                     </section>
 
-                    {/* SECTION 4: LIFE AT RORING */}
+                    {/* SECTION 4: LIFE AT ROAR */}
                     <section className="bg-white py-20 md:py-32">
                         <div className="container mx-auto px-6">
                             <div className="mb-12 md:mb-20">
                                 <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-slate-900 leading-none">
-                                    LIFE AT <br /><span className="text-blue-700">RORING ACADEMY</span>
+                                    LIFE AT <br /><span className="text-blue-700">ROAR ACADEMY</span>
                                 </h2>
                                 <div className="flex items-center gap-4 mt-6">
                                     <div className="h-1 w-16 md:w-20 bg-orange-500"></div>
@@ -229,7 +315,7 @@ export default function About({ breadcrumbs }: AboutProps) {
                         </div>
                     </section>
 
-                    {/* SECTION 7: CONTACT */}
+                    {/* SECTION 7: CONTACT + SOSIAL MEDIA */}
                     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
                         <div className="absolute inset-0 z-0">
                             <img src="/images/home/slide-2.jpg" className="w-full h-full object-cover grayscale" alt="Contact BG" />
@@ -245,7 +331,31 @@ export default function About({ breadcrumbs }: AboutProps) {
                                     <p>Jalan Hayam Wuruk No. 6, Surabaya, 60242</p>
                                     <p className="pt-4 text-4xl font-black text-orange-400 not-italic">(031) 5632606</p>
                                 </div>
-                                <button className="bg-blue-700 hover:bg-orange-500 text-white px-16 py-6 rounded-full font-black text-2xl uppercase italic transition-all shadow-3xl flex items-center gap-4 group">
+
+                                {/* Sosial Media */}
+                                <div className="mb-12">
+                                    <p className="text-white/60 font-bold uppercase tracking-[0.3em] text-[10px] mb-5">Ikuti Kami</p>
+                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                        {socialLinks.map((s) => (
+                                            <a
+                                                key={s.name}
+                                                href={s.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                aria-label={s.name}
+                                                className="group flex flex-col gap-3 p-5 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 hover:bg-orange-500 hover:border-orange-500 hover:-translate-y-1 transition-all duration-300"
+                                            >
+                                                <span className="text-orange-400 group-hover:text-white transition-colors">{s.icon}</span>
+                                                <span>
+                                                    <span className="block text-white font-black uppercase italic text-sm">{s.name}</span>
+                                                    <span className="block text-white/60 group-hover:text-white/90 text-xs font-medium truncate">{s.handle}</span>
+                                                </span>
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <button className="bg-blue-700 hover:bg-orange-500 text-white px-16 py-6 rounded-full font-black text-2xl uppercase italic transition-all shadow-2xl flex items-center gap-4 group">
                                     Start Your Journey
                                     <ChevronRight className="group-hover:translate-x-2 transition-transform" />
                                 </button>
@@ -279,6 +389,7 @@ export default function About({ breadcrumbs }: AboutProps) {
                             style={{ border: 0 }}
                             allowFullScreen
                             loading="lazy"
+                            title="Lokasi Roar Basketball"
                             className="w-full h-full grayscale-[50%] hover:grayscale-0 transition-all duration-1000"
                         />
                         <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]"></div>
@@ -458,6 +569,10 @@ export default function About({ breadcrumbs }: AboutProps) {
                 @keyframes pulse {
                     0%, 100% { opacity: 1; }
                     50%       { opacity: 0.4; }
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                    .gallery-track, .animate-slow-zoom, .animate-fade-in-up { animation: none; }
                 }
 
                 /* --- Scrollbar hide global --- */

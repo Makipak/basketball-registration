@@ -2,15 +2,12 @@ import { Head, useForm } from '@inertiajs/react';
 import { 
     User, Mail, Phone, Trophy, ChevronRight, 
     ArrowLeft, Upload, Info, ShieldCheck, 
-    CalendarDays, Copy, Check, School, MapPin
+    CalendarDays, Copy, Check, School
 } from 'lucide-react';
 import { useState } from 'react';
 
-const PROGRAMS = [
-    { id: 'junior', name: 'Junior Elite', price: 450000, label: 'Rp 450.000', category: 'U-16 to U-21' },
-    { id: 'pro', name: 'Pro Prospect', price: 600000, label: 'Rp 600.000', category: 'All Ages' },
-    { id: 'private', name: 'Private Camp', price: 200000, label: 'Mulai Rp 200.000', category: 'Personal Training' },
-];
+const REGISTRATION_FEE = 450000;
+const REGISTRATION_FEE_LABEL = 'Rp 450.000';
 
 export default function MemberRegistration() {
     const [preview, setPreview] = useState<string | null>(null);
@@ -19,11 +16,10 @@ export default function MemberRegistration() {
 
     const { data, setData, post, processing, errors } = useForm({
         name: '',
-        email: '', // Field email sudah ada di state
+        email: '',
         phone: '',
         age: '',
-        school: '', 
-        program_type: 'junior',
+        school: '',
         address: '',
         payment_proof: null as File | null,
     });
@@ -51,8 +47,6 @@ export default function MemberRegistration() {
             }
         }); 
     };
-
-    const selectedProgram = PROGRAMS.find(p => p.id === data.program_type);
 
     return (
         <div className="bg-[#f8fafc] min-h-screen p-4 md:p-8 lg:p-12 font-sans selection:bg-blue-600 selection:text-white">
@@ -115,7 +109,7 @@ export default function MemberRegistration() {
                         
                         <div className="flex items-center gap-3 p-4 bg-blue-50/50 rounded-2xl border border-dashed border-blue-200">
                             <Info className="w-4 h-4 text-blue-600 shrink-0" />
-                            <p className="text-[10px] font-black text-slate-600 uppercase leading-tight">Pastikan nominal sesuai dengan paket yang dipilih.</p>
+                            <p className="text-[10px] font-black text-slate-600 uppercase leading-tight">Pastikan nominal transfer sesuai dengan biaya pendaftaran.</p>
                         </div>
                     </div>
 
@@ -126,12 +120,12 @@ export default function MemberRegistration() {
                             <Trophy className="w-5 h-5 text-blue-200" />
                         </div>
                         <h2 className="text-4xl font-black tracking-tighter italic uppercase mb-2">
-                            {selectedProgram?.label}
+                            {REGISTRATION_FEE_LABEL}
                         </h2>
                         <div className="flex items-center gap-2">
                             <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
                             <p className="text-white font-black text-[10px] uppercase tracking-widest opacity-90">
-                                {selectedProgram?.name} — {selectedProgram?.category}
+                                Registration Fee
                             </p>
                         </div>
                     </div>
@@ -142,25 +136,6 @@ export default function MemberRegistration() {
                     <form onSubmit={submit} className="space-y-8">
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* PROGRAM SELECT */}
-                            <div className="md:col-span-2 space-y-3">
-                                <label className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-600 ml-2">Choose Program</label>
-                                <div className="relative">
-                                    <select 
-                                        value={data.program_type}
-                                        onChange={e => setData('program_type', e.target.value)}
-                                        className="w-full h-16 rounded-2xl border-2 border-slate-100 bg-slate-50 focus:bg-white focus:border-blue-600 focus:outline-none px-6 font-black uppercase text-slate-950 text-[13px] tracking-widest transition-all cursor-pointer appearance-none shadow-sm"
-                                    >
-                                        {PROGRAMS.map(prog => (
-                                            <option key={prog.id} value={prog.id} className="text-slate-900">{prog.name} ({prog.category})</option>
-                                        ))}
-                                    </select>
-                                    <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
-                                        <ChevronRight className="w-5 h-5 text-slate-400 rotate-90" />
-                                    </div>
-                                </div>
-                            </div>
-
                             {/* ATHLETE NAME */}
                             <div className="md:col-span-2 space-y-3">
                                 <label className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-600 ml-2">Full Name (Nama Atlet)</label>
@@ -178,7 +153,7 @@ export default function MemberRegistration() {
                                 {errors.name && <div className="text-red-500 text-xs font-bold mt-1 ml-2 uppercase tracking-widest">{errors.name}</div>}
                             </div>
 
-                            {/* EMAIL ADDRESS - NEW FIELD */}
+                            {/* EMAIL ADDRESS */}
                             <div className="md:col-span-2 space-y-3">
                                 <label className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-600 ml-2">Email Address</label>
                                 <div className="relative group">

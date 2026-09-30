@@ -21,8 +21,8 @@ export default function Welcome({ breadcrumbs }: AppLayoutProps) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
         '/images/home/slide-1.jpg',
-        '/images/home/slide-2.jpg', 
-        '/images/home/slide-3.jpg'  
+        '/images/home/slide-2.png', 
+        '/images/home/slide-3.png'  
     ];
 
     useEffect(() => {
@@ -104,43 +104,30 @@ export default function Welcome({ breadcrumbs }: AppLayoutProps) {
                             </div>
                         </div>
                     </section>
-
-                    {/* 2. PROGRAMS SECTION */}
+                    {/* 2. FACILITIES SECTION */}
                     <section className="py-24 px-6 md:px-12 lg:px-24 bg-white">
                         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                             <div>
-                                <h2 className="text-orange-500 font-black uppercase tracking-[0.2em] text-[10px] mb-3 italic">Our Programs</h2>
+                                <h2 className="text-orange-500 font-black uppercase tracking-[0.2em] text-[10px] mb-3 italic">Our Facilities</h2>
                                 <h3 className="text-4xl md:text-6xl font-black text-[#020617] uppercase tracking-tighter italic leading-none">
-                                    Pilih Kelas <span className="text-[#0056b3]">Impian</span>
+                                    Standar <span className="text-[#0056b3]">Internasional</span>
                                 </h3>
                             </div>
-                            <Link href="/program" className="text-[#0056b3] font-black text-xs uppercase tracking-[0.2em] flex items-center gap-2 hover:text-orange-500 transition-colors group">
-                                Semua Program <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                            </Link>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {[
-                                { title: 'Junior Elite', age: 'U-12 to U-15', img: '/images/kelas/junior.jpg', price: 'Rp 450rb/bln' },
-                                { title: 'Pro Prospect', age: 'U-16 to U-21', img: '/images/kelas/pro.jpg', price: 'Rp 600rb/bln' },
-                                { title: 'Private Camp', age: 'All Ages', img: '/images/kelas/privatecamp.jpg', price: 'Mulai 200rb' }
-                            ].map((prog, i) => (
+                                { title: 'Lapangan Standar FIBA', desc: 'Permukaan lantai kayu maple berkualitas tinggi dengan grip profesional.', img: '/images/home/fslts-1.jpg' },
+                                { title: 'Gym & Fitness', desc: 'Peralatan latihan kekuatan modern untuk meningkatkan performa atlet.', img: '/images/home/fslts-2.jpg' },
+                                { title: 'Loker & Shower', desc: 'Fasilitas ruang ganti yang bersih, aman, dan nyaman bagi member.', img: '/images/home/fslts-3.jpg' }
+                            ].map((item, i) => (
                                 <div key={i} className="group bg-slate-50 rounded-[2.5rem] border border-slate-100 overflow-hidden hover:border-[#0056b3]/20 hover:bg-white transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-[#0056b3]/5">
                                     <div className="h-72 overflow-hidden relative">
-                                        <img src={prog.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={prog.title} />
-                                        <div className="absolute top-6 right-6 bg-white/95 backdrop-blur px-4 py-1.5 rounded-full text-[9px] font-black text-[#0056b3] uppercase tracking-widest shadow-sm">
-                                            {prog.age}
-                                        </div>
+                                        <img src={item.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={item.title} />
                                     </div>
                                     <div className="p-10">
-                                        <h4 className="text-2xl font-black text-[#020617] uppercase mb-3 tracking-tighter italic">{prog.title}</h4>
-                                        <p className="text-slate-500 text-sm mb-8 font-medium leading-relaxed">Pelatihan intensif dengan fokus pada teknik fundamental dan strategi tim secara modern.</p>
-                                        <div className="flex justify-between items-center border-t border-slate-200 pt-6">
-                                            <span className="text-[#020617] font-black text-lg tracking-tight">{prog.price}</span>
-                                            <Link href="/program/member" className="text-[#0056b3] font-black text-[10px] uppercase tracking-widest flex items-center gap-2 group-hover:text-orange-500 transition-colors">
-                                                Daftar <ArrowRight size={16} />
-                                            </Link>
-                                        </div>
+                                        <h4 className="text-2xl font-black text-[#020617] uppercase mb-3 tracking-tighter italic">{item.title}</h4>
+                                        <p className="text-slate-500 text-sm font-medium leading-relaxed">{item.desc}</p>
                                     </div>
                                 </div>
                             ))}

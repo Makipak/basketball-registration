@@ -9,50 +9,50 @@ import { Instagram, Twitter, Trophy, Target, Zap, ShieldCheck } from 'lucide-rea
 export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
     const coaches = [
         {
-            name: 'Richard Roring',
+            name: 'Fictor Roaring',
             role: 'Head Coach',
             specialization: 'Tactical Strategy',
-            img: '/images/team-1.jpg',
+            img: '/images/coach/coach-1.jpg',
             experience: '15+ Years',
             bio: 'Disiplin bukan pilihan, tapi pondasi. Kami mencetak pemenang, bukan sekadar pemain.'
         },
         {
-            name: 'Alvin Susanto',
-            role: 'Asst. Coach',
+            name: 'M. Gofar',
+            role: 'Jabatan',
             specialization: 'Skill Development',
-            img: '/images/team-2.jpg',
+            img: '/images/coach/coach-1.jpg',
             experience: '8 Years',
             bio: 'Detail kecil di lapangan menentukan perbedaan antara pemain bagus dan pemain hebat.'
         },
         {
-            name: 'Denny Sumargo',
-            role: 'Technical Advisor',
+            name: 'Faisal J Ahmad',
+            role: 'Jabatan',
             specialization: 'Mental Toughness',
-            img: '/images/team-3.jpg',
+            img: '/images/coach/coach-1.jpg',
             experience: '12 Years',
             bio: 'Mentalitas adalah 90% dari permainan. Jika pikiranmu kuat, tubuhmu akan mengikuti.'
         },
         {
-            name: 'Maria Selena',
-            role: 'Management',
+            name: 'Amin Prihantono',
+            role: 'Jabatan',
             specialization: 'Athlete Branding',
-            img: '/images/team-4.jpg',
+            img: '/images/coach/coach-1.jpg',
             experience: '6 Years',
             bio: 'Profesionalisme di luar lapangan sama pentingnya dengan performa di dalam ring.'
         },
         {
-            name: 'Andakara Prastawa',
-            role: 'Point Guard Specialist',
+            name: 'Fredy L W',
+            role: 'Jabatan',
             specialization: 'Playmaking & Shooting',
-            img: '/images/team-5.jpg',
+            img: '/images/coach/coach-1.jpg',
             experience: '10 Years',
             bio: 'Visi lapangan dan akurasi adalah senjata utama. Kami ajarkan cara membaca permainan.'
         },
         {
-            name: 'Arki Wisnu',
-            role: 'Forward Specialist',
+            name: '⁠Randy Putrama',
+            role: 'Jabatan',
             specialization: 'Physicality & Drive',
-            img: '/images/team-6.jpg',
+            img: '/images/coach/coach-1.jpg',
             experience: '11 Years',
             bio: 'Kekuatan fisik dan determinasi untuk menyerang paint area adalah kunci kemenangan.'
         }

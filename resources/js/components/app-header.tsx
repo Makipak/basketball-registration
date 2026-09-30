@@ -1,17 +1,29 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import type { BreadcrumbItem } from '@/types';
 import { useState } from 'react';
-import { Menu, X, UserCircle, ArrowRight } from 'lucide-react';
+import { Menu, X, UserCircle, LogOut, ArrowRight } from 'lucide-react';
+
+interface PageProps {
+    auth: {
+        user: {
+            id: number;
+            name: string;
+            email: string;
+        } | null;
+    };
+    [key: string]: any;
+}
 
 export function AppHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItem[] }) {
     const [isOpen, setIsOpen] = useState(false);
+    const { auth } = usePage<PageProps>().props;
+    const isLoggedIn = !!auth?.user;
 
     const navItems = [
         { name: 'Home', href: '/' },
         { name: 'Schedule', href: '/schedule' },
         { name: 'Coach', href: '/coach' },
-        { name: 'Program', href: '/program' },
         { name: 'About', href: '/about' },
         { name: 'FAQ', href: '/faq' },
     ];
@@ -23,10 +35,10 @@ export function AppHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItem[]
                     
                     {/* LOGO - More compact on mobile */}
                     <Link href="/" className="flex items-center gap-2 md:gap-3 group shrink-0">
-                        <img src="/images/logo/roringlogo.png" alt="Logo" className="h-8 md:h-10 w-auto object-contain" />
+                        <img src="/images/logo/Roar-B.png" alt="Logo" className="h-8 md:h-10 w-auto object-contain" />
                         <div className="flex flex-col">
                             <span className="text-sm md:text-lg text-black font-black tracking-tighter leading-none uppercase italic">
-                                Roring<span className="text-orange-500">basketball</span>
+                                Roar<span className="text-orange-500">basketball</span>
                             </span>
                             {/* Hidden on very small screens to save space */}
                             <span className="hidden xs:block text-[7px] text-gray-500 font-bold tracking-[0.4em] uppercase mt-0.5">Academy</span>
@@ -44,18 +56,30 @@ export function AppHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItem[]
 
                     {/* ACTIONS */}
                     <div className="flex items-center gap-2 md:gap-4">
-                        {/* Desktop Only Login */}
-                        <Link 
-                            href="/login" 
-                            className="hidden lg:flex items-center gap-2 px-3 py-2 text-[10px] font-black text-black uppercase tracking-widest hover:text-orange-500 transition-all"
-                        >
-                            <UserCircle size={16} />
-                            Login
-                        </Link>
+                        {/* Desktop Only Login/Logout */}
+                        {isLoggedIn ? (
+                            <Link 
+                                href="/logout"
+                                method="post"
+                                as="button"
+                                className="hidden lg:flex items-center gap-2 px-3 py-2 text-[10px] font-black text-black uppercase tracking-widest hover:text-orange-500 transition-all"
+                            >
+                                <LogOut size={16} />
+                                Logout
+                            </Link>
+                        ) : (
+                            <Link 
+                                href="/login" 
+                                className="hidden lg:flex items-center gap-2 px-3 py-2 text-[10px] font-black text-black uppercase tracking-widest hover:text-orange-500 transition-all"
+                            >
+                                <UserCircle size={16} />
+                                Login
+                            </Link>
+                        )}
 
                         {/* Join Button - Adjusted size for mobile */}
                         <Link 
-                            href="/register" 
+                            href="/program/member" 
                             className="bg-orange-500 hover:bg-orange-600 px-4 md:px-6 py-2 md:py-2.5 rounded-xl font-black text-[9px] md:text-[10px] text-white uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-orange-500/20"
                         >
                             Join Member
@@ -79,16 +103,29 @@ export function AppHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItem[]
                     <div className="absolute inset-0 bg-[#020617]/98 bg-[radial-gradient(circle_at_top_right,_#f9731615,_transparent_50%)] -z-10"></div>
                     
                     <nav className="relative flex flex-col p-6 gap-4">
-                        {/* Primary Mobile Action: Login */}
+                        {/* Primary Mobile Action: Login/Logout */}
                         <div className={`transition-all duration-500 delay-75 ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
-                            <Link 
-                                href="/login"
-                                onClick={() => setIsOpen(false)}
-                                className="w-full py-4 rounded-2xl bg-white/2 border border-white/10 text-white font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 active:bg-white/10"
-                            >
-                                <UserCircle size={20} className="text-orange-500" />
-                                Login to Account
-                            </Link>
+                            {isLoggedIn ? (
+                                <Link 
+                                    href="/logout"
+                                    method="post"
+                                    as="button"
+                                    onClick={() => setIsOpen(false)}
+                                    className="w-full py-4 rounded-2xl bg-white/2 border border-white/10 text-white font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 active:bg-white/10"
+                                >
+                                    <LogOut size={20} className="text-orange-500" />
+                                    Logout
+                                </Link>
+                            ) : (
+                                <Link 
+                                    href="/login"
+                                    onClick={() => setIsOpen(false)}
+                                    className="w-full py-4 rounded-2xl bg-white/2 border border-white/10 text-white font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 active:bg-white/10"
+                                >
+                                    <UserCircle size={20} className="text-orange-500" />
+                                    Login to Account
+                                </Link>
+                            )}
                         </div>
 
                         {/* Nav Links */}

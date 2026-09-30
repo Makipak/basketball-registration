@@ -8,9 +8,9 @@ export function Footer() {
                     {/* Branding */}
                     <div className="col-span-1 md:col-span-2">
                         <div className="flex items-center gap-3 mb-6">
-                            <img src="/images/logo/roringlogo.png" className="h-10 w-auto" alt="Logo" />
+                            <img src="/images/logo/Roar-P.png" className="h-10 w-auto" alt="Logo" />
                             <span className="text-xl font-bold tracking-tighter uppercase text-white">
-                                Roring<span className="text-orange-500">basketball</span>
+                                Roar<span className="text-orange-500">basketball</span>
                             </span>
                         </div>
                         <p className="text-blue-100 text-sm max-w-sm mb-8 font-medium leading-relaxed">
@@ -25,7 +25,6 @@ export function Footer() {
                             <li><Link href="/" className="hover:text-orange-500 transition-colors">Home</Link></li>
                             <li><Link href="/schedule" className="hover:text-orange-500 transition-colors">Schedule</Link></li>
                             <li><Link href="/coach" className="hover:text-orange-500 transition-colors">Coach</Link></li>
-                            <li><Link href="/program" className="hover:text-orange-500 transition-colors">Program</Link></li>
                             <li><Link href="/about" className="hover:text-orange-500 transition-colors">About</Link></li>
                             <li><Link href="/faq" className="hover:text-orange-500 transition-colors">FAQ</Link></li>
                         </ul>
@@ -35,9 +34,9 @@ export function Footer() {
                     <div>
                         <h6 className="font-bold uppercase tracking-widest text-[10px] mb-6 text-blue-200/60">Kontak</h6>
                         <div className="text-white text-xs font-semibold uppercase tracking-wider leading-loose">
-                            <p>Gor Basket Serang</p>
-                            <p>Banten, Indonesia</p>
-                            <p className="mt-2 text-orange-500 font-black tracking-widest">@RORINGBASKETBALL</p>
+                            <p>Ancol Hoops</p>
+                            <p>Jakarta, Indonesia</p>
+                            <p className="mt-2 text-orange-500 font-black tracking-widest">@roarbasketball_championship</p>
                         </div>
                     </div>
                 </div>

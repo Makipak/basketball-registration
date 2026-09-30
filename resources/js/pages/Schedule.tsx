@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AppContent } from '@/components/app-content';
 import { AppHeader } from '@/components/app-header';
 import { AppShell } from '@/components/app-shell';
-import { Footer } from '@/components/footer'; // Pastikan footer dipanggil
+import { Footer } from '@/components/footer';
 import type { AppLayoutProps } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { 
@@ -10,11 +10,9 @@ import {
     Clock, 
     MapPin, 
     ChevronRight, 
-    Filter,
     Users,
     Info,
-    Trophy,
-    Search
+    Trophy
 } from 'lucide-react';
 
 export default function Schedule({ breadcrumbs }: AppLayoutProps) {
@@ -79,16 +77,6 @@ export default function Schedule({ breadcrumbs }: AppLayoutProps) {
                                 <p className="text-slate-500 text-lg font-medium leading-relaxed mb-8">
                                     Disiplin adalah kunci. Pilih sesi latihan Anda dan bangun konsistensi untuk mencapai level elit.
                                 </p>
-                                
-                                <div className="flex flex-wrap gap-4">
-                                    <div className="flex items-center gap-3 bg-slate-100/50 border border-slate-200 p-2 pl-4 rounded-2xl w-full md:w-auto">
-                                        <Search size={18} className="text-slate-400" />
-                                        <input type="text" placeholder="Cari kelas atau pelatih..." className="bg-transparent border-none focus:ring-0 text-sm font-medium w-full md:w-64" />
-                                    </div>
-                                    <button className="bg-slate-900 text-white px-6 py-4 rounded-2xl font-bold text-sm hover:bg-blue-600 transition-all flex items-center gap-2">
-                                        <Filter size={18} /> Filter Sesi
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </section>
@@ -198,15 +186,14 @@ export default function Schedule({ breadcrumbs }: AppLayoutProps) {
                             </div>
                         </div>
                     </section>
+
                     {/* 4. NOTE SECTION */}
                     <section className="pb-32 px-6">
                         <div className="max-w-4xl mx-auto">
-                            {/* Ganti HoopsLegacy jadi Roring Basketball di poin 02 */}
                             <div className="bg-slate-900 border-2 border-dashed border-slate-700 rounded-[3rem] p-10 md:p-16 text-center">
                                 <div className="inline-flex bg-[#0056b3] text-white p-4 rounded-2xl mb-8">
-                                    <Info size={32} />
+                                    <div className="flex items-center justify-center"><Info size={32} /></div>
                                 </div>
-                                {/* Fix typo class font-white jadi text-white */}
                                 <h4 className="text-2xl font-black uppercase italic tracking-tight mb-4 text-white">
                                     Ketentuan Latihan
                                 </h4>
@@ -234,7 +221,6 @@ export default function Schedule({ breadcrumbs }: AppLayoutProps) {
                                 </div>
                             </div>
                         </div>
-                        
                     </section>
                     <Footer />
                 </div>

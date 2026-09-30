@@ -3,7 +3,7 @@ import {
     LayoutDashboard, Users, Trophy, 
     Calendar, LogOut, ChevronRight, 
     CreditCard, UserCircle, Menu, X,
-    ShieldCheck // Icon tanda Admin
+    ShieldCheck
 } from 'lucide-react';
 import { ReactNode, useState, useEffect } from 'react';
 
@@ -30,15 +30,16 @@ export default function AdminLayout({ children }: Props) {
         { name: 'Members', href: '/admin/member', icon: Users },
         { name: 'Programs', href: '/admin/programs', icon: Trophy },
         { name: 'Schedule', href: '/admin/schedule', icon: Calendar },
-        { name: 'Payments', href: '/admin/payments', icon: CreditCard },
+
     ];
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
     return (
-        <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row overflow-x-hidden">
+        /* FIX 1: Tambahkan md:h-screen dan overflow-hidden agar window utama tidak scroll */
+        <div className="min-h-screen md:h-screen bg-slate-50 flex flex-col md:flex-row overflow-hidden">
             
-            {/* CSS INJECT - Menghilangkan Scrollbar */}
+            {/* CSS INJECT */}
             <style dangerouslySetInnerHTML={{ __html: `
                 .no-scrollbar::-webkit-scrollbar { display: none; }
                 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -47,11 +48,10 @@ export default function AdminLayout({ children }: Props) {
             {/* MOBILE HEADER */}
             <header className="md:hidden bg-slate-950 text-white p-4 flex items-center justify-between sticky top-0 z-[60] border-b border-slate-800 shadow-xl">
                 <div className="flex items-center gap-3">
-                    <img src="/images/logo/roringlogo.png" className="h-6 w-auto grayscale brightness-200" alt="Logo" />
+                    <img src="/images/logo/Roar-B.png" className="h-6 w-auto grayscale brightness-200" alt="Logo" />
                     <span className="text-sm font-black tracking-tighter uppercase italic">RORING<span className="text-blue-600">.</span>HQ</span>
                 </div>
                 
-                {/* Bagian Hamburger + Tanda Admin */}
                 <div className="flex items-center gap-2">
                     <div className="flex items-center gap-1 bg-blue-600/10 border border-blue-500/20 py-1 px-2.5 rounded-lg">
                         <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
@@ -75,11 +75,12 @@ export default function AdminLayout({ children }: Props) {
             />
 
             {/* SIDEBAR */}
+            {/* FIX 2: Gunakan md:h-full dan md:relative agar sidebar duduk manis di samping konten */}
             <aside className={`
                 fixed inset-y-0 left-0 w-64 bg-slate-950 border-r border-slate-900 flex flex-col z-[80]
                 transition-transform duration-300 ease-in-out transform
                 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-                md:sticky md:top-0 md:h-screen
+                md:relative md:translate-x-0 md:h-full md:flex-shrink-0
             `}>
                 
                 {/* BRANDING */}
@@ -95,7 +96,7 @@ export default function AdminLayout({ children }: Props) {
                     </button>
                 </div>
 
-                {/* NAV LINKS - Scrollbar Tersembunyi */}
+                {/* NAV LINKS */}
                 <nav className="flex-1 overflow-y-auto p-4 md:p-6 space-y-1.5 no-scrollbar">
                     <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4 px-3">Main Menu</p>
                     
@@ -123,7 +124,7 @@ export default function AdminLayout({ children }: Props) {
                     })}
                 </nav>
 
-                {/* USER PROFILE & LOGOUT */}
+                {/* PROFILE & LOGOUT */}
                 <div className="p-6 bg-slate-900/40 border-t border-slate-900">
                     <div className="flex items-center gap-3 mb-5 px-1">
                         <div className="relative group">
@@ -157,7 +158,8 @@ export default function AdminLayout({ children }: Props) {
             </aside>
 
             {/* MAIN CONTENT AREA */}
-            <main className="flex-1 min-w-0 relative bg-slate-50 min-h-screen">
+            {/* FIX 3: Tambahkan md:h-full dan md:overflow-y-auto agar area ini saja yang scroll */}
+            <main className="flex-1 min-w-0 relative bg-slate-50 md:h-full md:overflow-y-auto">
                 <div className="p-5 md:p-10 max-w-[1440px] mx-auto animate-in fade-in duration-500">
                     {children}
                 </div>
