@@ -6,6 +6,8 @@
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
+        "build:watch": "vite build --watch",
+        "dev:ngrok": "concurrently -c \"#93c5fd,#c4b5fd,#fdba74,#f9a8d4,#34d399\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"npm run build:watch\" \"node scripts/static-proxy.mjs\" \"node scripts/ngrok.mjs\" --names=server,queue,vite-build,proxy,ngrok --kill-others",
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
