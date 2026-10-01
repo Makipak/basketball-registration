@@ -48,7 +48,7 @@ export default function AdminLayout({ children }: Props) {
             {/* MOBILE HEADER */}
             <header className="md:hidden bg-slate-950 text-white p-4 flex items-center justify-between sticky top-0 z-[60] border-b border-slate-800 shadow-xl">
                 <div className="flex items-center gap-3">
-                    <img src="/images/logo/Roar-B.png" className="h-6 w-auto grayscale brightness-200" alt="Logo" />
+                    <img src="/images/logo/Roar-B.webp" className="h-6 w-auto grayscale brightness-200" alt="Logo" />
                     <span className="text-sm font-black tracking-tighter uppercase italic">RORING<span className="text-blue-600">.</span>HQ</span>
                 </div>
                 
@@ -86,7 +86,7 @@ export default function AdminLayout({ children }: Props) {
                 {/* BRANDING */}
                 <div className="p-6 md:p-8 border-b border-slate-900 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <img src="/images/logo/roringlogo.png" className="h-7 w-auto grayscale brightness-200" alt="Logo" />
+                        <img src="/images/logo/roringlogo.webp" className="h-7 w-auto grayscale brightness-200" alt="Logo" />
                         <span className="text-xl font-black tracking-tighter uppercase text-white italic leading-none">
                             RORING<span className="text-blue-600">.</span>HQ
                         </span>

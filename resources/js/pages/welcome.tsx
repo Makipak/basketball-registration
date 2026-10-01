@@ -37,16 +37,16 @@ type WelcomeProps = AppLayoutProps & {
 // ⚠️ DATA DUMMY — dipakai selama backend belum terhubung.
 // Hapus / abaikan setelah props `instagramPosts` dikirim dari server.
 const dummyPosts: InstagramPost[] = [
-    { id: '1', media_type: 'IMAGE', media_url: '/images/news/news-1.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-04-12T09:00:00Z', caption: 'Persiapan menuju National Championship 2026. Seleksi ketat sudah dimulai, siapa yang siap tampil?' },
-    { id: '2', media_type: 'VIDEO', media_url: '/images/news/news-2.jpg', thumbnail_url: '/images/news/news-2.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-04-08T09:00:00Z', caption: 'Highlight latihan intensif Roar Basketball Championship minggu ini. Drill dribbling dan shooting tanpa henti.' },
-    { id: '3', media_type: 'CAROUSEL_ALBUM', media_url: '/images/news/news-3.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-04-03T09:00:00Z', caption: 'Momen seru di National League 2026. Terima kasih untuk semua dukungan!' },
-    { id: '4', media_type: 'IMAGE', media_url: '/images/news/news-2.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-03-28T09:00:00Z', caption: 'Selamat kepada para juara yang sudah bekerja keras sepanjang musim.' },
-    { id: '5', media_type: 'VIDEO', media_url: '/images/news/news-3.jpg', thumbnail_url: '/images/news/news-3.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-03-21T09:00:00Z', caption: 'Behind the scene sesi latihan pagi bersama Coach Fictor.' },
-    { id: '6', media_type: 'IMAGE', media_url: '/images/news/news-1.jpg', permalink: 'https://instagram.com/roarbasketball_championship', timestamp: '2026-03-15T09:00:00Z', caption: 'Pendaftaran member baru Roar Basketball Championship batch berikutnya sudah dibuka. Cek link di bio.' },
+    { id: '1', media_type: 'IMAGE', media_url: '/images/news/news-1.webp', permalink: 'https://www.instagram.com/roarbasketball_championship/', timestamp: '2026-04-12T09:00:00Z', caption: 'Persiapan menuju National Championship 2026. Seleksi ketat sudah dimulai, siapa yang siap tampil?' },
+    { id: '2', media_type: 'VIDEO', media_url: '/images/news/news-2.webp', thumbnail_url: '/images/news/news-2.webp', permalink: 'https://www.instagram.com/roarbasketball_championship/', timestamp: '2026-04-08T09:00:00Z', caption: 'Highlight latihan intensif Roar Basketball Championship minggu ini. Drill dribbling dan shooting tanpa henti.' },
+    { id: '3', media_type: 'CAROUSEL_ALBUM', media_url: '/images/news/news-3.webp', permalink: 'https://www.instagram.com/roarbasketball_championship/', timestamp: '2026-04-03T09:00:00Z', caption: 'Momen seru di National League 2026. Terima kasih untuk semua dukungan!' },
+    { id: '4', media_type: 'IMAGE', media_url: '/images/news/news-2.webp', permalink: 'https://www.instagram.com/roarbasketball_championship/', timestamp: '2026-03-28T09:00:00Z', caption: 'Selamat kepada para juara yang sudah bekerja keras sepanjang musim.' },
+    { id: '5', media_type: 'VIDEO', media_url: '/images/news/news-3.webp', thumbnail_url: '/images/news/news-3.webp', permalink: 'https://www.instagram.com/roarbasketball_championship/', timestamp: '2026-03-21T09:00:00Z', caption: 'Behind the scene sesi latihan pagi bersama Coach Fictor.' },
+    { id: '6', media_type: 'IMAGE', media_url: '/images/news/news-1.webp', permalink: 'https://www.instagram.com/roarbasketball_championship/', timestamp: '2026-03-15T09:00:00Z', caption: 'Pendaftaran member baru Roar Basketball Championship batch berikutnya sudah dibuka. Cek link di bio.' },
 ];
 
 const IG_HANDLE = '@roarbasketball_championship';
-const IG_URL = 'https://instagram.com/roarbasketball_championship'; // ⚠️ GANTI dengan akun asli
+const IG_URL = 'https://www.instagram.com/roarbasketball_championship/';
 
 const formatDate = (iso: string) =>
     new Date(iso).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -54,9 +54,9 @@ const formatDate = (iso: string) =>
 export default function Welcome({ breadcrumbs, instagramPosts }: WelcomeProps) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
-        '/images/home/slide-1.jpg',
-        '/images/home/slide-2.png',
-        '/images/home/slide-3.png',
+        '/images/home/slide-1.webp',
+        '/images/home/slide-2.webp',
+        '/images/home/slide-3.webp',
     ];
 
     useEffect(() => {
@@ -155,9 +155,9 @@ export default function Welcome({ breadcrumbs, instagramPosts }: WelcomeProps) {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {[
-                                { title: 'Lapangan Standar FIBA', desc: 'Permukaan lantai kayu maple berkualitas tinggi dengan grip profesional.', img: '/images/home/fslts-1.jpg' },
-                                { title: 'Gym & Fitness', desc: 'Peralatan latihan kekuatan modern untuk meningkatkan performa atlet.', img: '/images/home/fslts-2.jpg' },
-                                { title: 'Loker & Shower', desc: 'Fasilitas ruang ganti yang bersih, aman, dan nyaman bagi member.', img: '/images/home/fslts-3.jpg' },
+                                { title: 'Lapangan Standar FIBA', desc: 'Permukaan lantai kayu maple berkualitas tinggi dengan grip profesional.', img: '/images/home/fslts-1.webp' },
+                                { title: 'Gym & Fitness', desc: 'Peralatan latihan kekuatan modern untuk meningkatkan performa atlet.', img: '/images/home/fslts-2.webp' },
+                                { title: 'Loker & Shower', desc: 'Fasilitas ruang ganti yang bersih, aman, dan nyaman bagi member.', img: '/images/home/fslts-3.webp' },
                             ].map((item, i) => (
                                 <div key={i} className="group bg-slate-50 rounded-[2.5rem] border border-slate-100 overflow-hidden hover:border-[#0056b3]/20 hover:bg-white transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-[#0056b3]/5">
                                     <div className="h-72 overflow-hidden relative">

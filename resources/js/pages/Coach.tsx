@@ -12,7 +12,7 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
             name: 'Fictor Roaring',
             role: 'Head Coach',
             specialization: 'Tactical Strategy',
-            img: '/images/coach/coach-1.jpg',
+            img: '/images/coach/coach-1.webp',
             experience: '15+ Years',
             bio: 'Disiplin bukan pilihan, tapi pondasi. Kami mencetak pemenang, bukan sekadar pemain.'
         },
@@ -20,7 +20,7 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
             name: 'M. Gofar',
             role: 'Jabatan',
             specialization: 'Skill Development',
-            img: '/images/coach/coach-1.jpg',
+            img: '/images/coach/coach-1.webp',
             experience: '8 Years',
             bio: 'Detail kecil di lapangan menentukan perbedaan antara pemain bagus dan pemain hebat.'
         },
@@ -28,7 +28,7 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
             name: 'Faisal J Ahmad',
             role: 'Jabatan',
             specialization: 'Mental Toughness',
-            img: '/images/coach/coach-1.jpg',
+            img: '/images/coach/coach-1.webp',
             experience: '12 Years',
             bio: 'Mentalitas adalah 90% dari permainan. Jika pikiranmu kuat, tubuhmu akan mengikuti.'
         },
@@ -36,7 +36,7 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
             name: 'Amin Prihantono',
             role: 'Jabatan',
             specialization: 'Athlete Branding',
-            img: '/images/coach/coach-1.jpg',
+            img: '/images/coach/coach-1.webp',
             experience: '6 Years',
             bio: 'Profesionalisme di luar lapangan sama pentingnya dengan performa di dalam ring.'
         },
@@ -44,7 +44,7 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
             name: 'Fredy L W',
             role: 'Jabatan',
             specialization: 'Playmaking & Shooting',
-            img: '/images/coach/coach-1.jpg',
+            img: '/images/coach/coach-1.webp',
             experience: '10 Years',
             bio: 'Visi lapangan dan akurasi adalah senjata utama. Kami ajarkan cara membaca permainan.'
         },
@@ -52,7 +52,7 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
             name: '⁠Randy Putrama',
             role: 'Jabatan',
             specialization: 'Physicality & Drive',
-            img: '/images/coach/coach-1.jpg',
+            img: '/images/coach/coach-1.webp',
             experience: '11 Years',
             bio: 'Kekuatan fisik dan determinasi untuk menyerang paint area adalah kunci kemenangan.'
         }

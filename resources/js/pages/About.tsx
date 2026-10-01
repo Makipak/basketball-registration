@@ -19,6 +19,143 @@ import {
     Music2,
 } from 'lucide-react';
 
+// Video reels (portrait 9:16). File web hasil kompres ada di public/videos/ (720p, faststart).
+// Poster di public/images/about/. Untuk menambah video: encode dengan
+//   ffmpeg -i in.mp4 -vf "scale=720:1280,fps=30" -c:v libx264 -crf 27 -preset fast -c:a aac -b:a 96k -movflags +faststart out.mp4
+const reels = [
+    { src: '/videos/roar-highlights-vs-cs.mp4', poster: '/images/about/roar-highlights-vs-cs.webp', title: 'Roar Highlights vs CS' },
+    { src: '/videos/kenneth-vs-cs.mp4', poster: '/images/about/kenneth-vs-cs.webp', title: 'Kenneth vs CS' },
+    { src: '/videos/kenneth-vs-cougar.mp4', poster: '/images/about/kenneth-vs-cougar.webp', title: 'Kenneth vs Cougar' },
+    { src: '/videos/kenneth-vs-ht.mp4', poster: '/images/about/kenneth-vs-ht.webp', title: 'Kenneth vs HT' },
+];
+
+function ReelCard({ src, poster, title }: (typeof reels)[number]) {
+    const ref = React.useRef<HTMLVideoElement>(null);
+    const [playing, setPlaying] = useState(false);
+
+    const toggle = () => {
+        const v = ref.current;
+        if (!v) return;
+        if (v.paused) {
+            // pause reel lain supaya tidak tumpang tindih
+            document.querySelectorAll<HTMLVideoElement>('video[data-reel]').forEach((el) => {
+                if (el !== v) el.pause();
+            });
+            v.play().catch(() => setPlaying(false));
+        } else {
+            v.pause();
+        }
+    };
+
+    return (
+        <div className="group relative aspect-[9/16] w-[72vw] shrink-0 snap-center overflow-hidden rounded-[2rem] bg-slate-950 shadow-2xl ring-1 ring-white/10 sm:w-[45vw] md:w-auto md:rounded-[3rem]">
+            <video
+                ref={ref}
+                data-reel
+                src={src}
+                poster={poster}
+                preload="none" // jangan download 3 video sebelum diklik
+                playsInline // wajib di iOS agar tidak auto-fullscreen
+                loop
+                onPlay={() => setPlaying(true)}
+                onPause={() => setPlaying(false)}
+                onClick={toggle}
+                className="h-full w-full cursor-pointer object-cover"
+            />
+            {!playing && (
+                <button
+                    type="button"
+                    onClick={toggle}
+                    aria-label={`Putar video ${title}`}
+                    className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 transition-colors group-hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+                >
+                    <span className="flex h-20 w-20 items-center justify-center rounded-full bg-orange-500 text-white shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12">
+                        <PlayCircle size={44} fill="currentColor" />
+                    </span>
+                </button>
+            )}
+        </div>
+    );
+}
+
+// Carousel reel: di mobile berputar tanpa ujung (infinite), di desktop grid biasa.
+// Cara kerja: list di-render 3x [A][B][C]; mulai di set tengah (B). Setelah scroll berhenti,
+// kalau posisi masuk set A / C, scrollLeft digeser sebesar lebar 1 set sehingga tampilan
+// identik tapi kita kembali di set tengah -> user bisa swipe ke arah mana pun tanpa mentok.
+// Salinan A & C disembunyikan di md+ supaya grid desktop tetap 4 video.
+function ReelCarousel() {
+    const ref = React.useRef<HTMLDivElement>(null);
+    const n = reels.length;
+    const items = [0, 1, 2].flatMap((copy) => reels.map((r) => ({ ...r, copy })));
+
+    React.useLayoutEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+
+        const setWidth = () => {
+            const a = el.children[0] as HTMLElement | undefined;
+            const b = el.children[n] as HTMLElement | undefined;
+            return a && b ? b.offsetLeft - a.offsetLeft : 0;
+        };
+
+        // jump tanpa animasi & tanpa snap supaya tidak terlihat "loncat"
+        const jump = (delta: number) => {
+            el.style.scrollSnapType = 'none';
+            el.scrollLeft += delta;
+            requestAnimationFrame(() => {
+                el.style.scrollSnapType = '';
+            });
+        };
+
+        const isCarousel = () => el.scrollWidth > el.clientWidth + 1;
+
+        // posisi awal: item pertama di set tengah, rata tengah
+        const init = () => {
+            if (!isCarousel()) return;
+            const first = el.children[n] as HTMLElement;
+            el.style.scrollSnapType = 'none';
+            el.scrollLeft = first.offsetLeft - (el.clientWidth - first.offsetWidth) / 2;
+            requestAnimationFrame(() => {
+                el.style.scrollSnapType = '';
+            });
+        };
+        init();
+
+        let timer: ReturnType<typeof setTimeout>;
+        const onScroll = () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                if (!isCarousel()) return;
+                const w = setWidth();
+                if (!w) return;
+                if (el.scrollLeft < w * 0.5) jump(w);
+                else if (el.scrollLeft > w * 1.5) jump(-w);
+            }, 120);
+        };
+
+        el.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', init);
+        return () => {
+            clearTimeout(timer);
+            el.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', init);
+        };
+    }, [n]);
+
+    return (
+        <div
+            ref={ref}
+            className="mx-auto flex max-w-6xl snap-x snap-mandatory gap-4 overflow-x-auto scrollbar-hide md:grid md:grid-cols-2 md:gap-8 md:overflow-visible lg:grid-cols-4 lg:gap-6"
+        >
+            {items.map(({ copy, ...r }) => (
+                <div key={`${copy}-${r.src}`} className={copy === 1 ? 'contents' : 'contents md:hidden'}>
+                    <ReelCard {...r} />
+                </div>
+            ))}
+        </div>
+    );
+}
+
 interface AboutProps {
     breadcrumbs: any;
 }
@@ -28,9 +165,9 @@ export default function About({ breadcrumbs }: AboutProps) {
 
     
     const heroImages = [
-        '/images/about/about-1.jpg',
-        '/images/about/about-2.png',
-        '/images/about/about-3.jpg',
+        '/images/about/about-1.webp',
+        '/images/about/about-2.webp',
+        '/images/about/about-3.webp',
     ];
     const [heroIndex, setHeroIndex] = useState(0);
 
@@ -42,18 +179,18 @@ export default function About({ breadcrumbs }: AboutProps) {
     }, [heroImages.length]);
 
     const activities = [
-        { title: 'BE ACTIVE', desc: 'Talenta muda yang dinamis siap menghadapi tantangan global dengan program pelatihan yang terukur dan berkelanjutan.', img: '/images/activity/activity-1.jpeg' },
-        { title: 'INTENSIVE DRILL', desc: 'Latihan fundamental untuk akurasi dan kontrol bola maksimal, mencakup dribbling, shooting, serta footwork dasar.', img: '/images/activity/activity-2.jpg' },
-        { title: 'TEAM WORK', desc: 'Membangun chemistry kuat di dalam dan luar lapangan melalui sesi diskusi strategi dan kegiatan bonding.', img: '/images/activity/activity-3.jpg' },
-        { title: 'GAME READY', desc: 'Kesiapan fisik dan mental untuk level turnamen tertinggi dengan simulasi pertandingan kompetitif.', img: '/images/activity/activity-4.jpg' },
+        { title: 'BE ACTIVE', desc: 'Talenta muda yang dinamis siap menghadapi tantangan global dengan program pelatihan yang terukur dan berkelanjutan.', img: '/images/activity/activity-1.webp' },
+        { title: 'INTENSIVE DRILL', desc: 'Latihan fundamental untuk akurasi dan kontrol bola maksimal, mencakup dribbling, shooting, serta footwork dasar.', img: '/images/activity/activity-2.webp' },
+        { title: 'TEAM WORK', desc: 'Membangun chemistry kuat di dalam dan luar lapangan melalui sesi diskusi strategi dan kegiatan bonding.', img: '/images/activity/activity-3.webp' },
+        { title: 'GAME READY', desc: 'Kesiapan fisik dan mental untuk level turnamen tertinggi dengan simulasi pertandingan kompetitif.', img: '/images/activity/activity-4.webp' },
     ];
 
     const architects = [
-        { name: 'Fictor Roaring', role: 'Head Coach', img: '/images/team/team-1.jpg', quote: 'Disiplin adalah fondasi dari setiap kemenangan besar yang bertahan lama.' },
+        { name: 'Fictor Roaring', role: 'Head Coach', img: '/images/team/team-1.webp', quote: 'Disiplin adalah fondasi dari setiap kemenangan besar yang bertahan lama.' },
     ];
 
     const galleryItems = [...Array(10)].map((_, i) => ({
-        img: `/images/scroll/scroll-${(i % 5) + 1}.jpg`,
+        img: `/images/scroll/scroll-${(i % 5) + 1}.webp`,
         title: 'National League 2026',
         location: 'DBL Arena, Surabaya',
     }));
@@ -66,13 +203,13 @@ export default function About({ breadcrumbs }: AboutProps) {
         { value: '150+', label: 'Atlet Binaan', icon: <Users size={32} /> },
     ];
 
-    // GANTI link dengan akun sosial media asli
-        const socialLinks = [
-            { name: 'Instagram', handle: 'Roar Basketball Championship', href: 'https://instagram.com/roarbasketball_championship', icon: <Instagram size={24} /> },
-            { name: 'YouTube', handle: 'Roar Basketball Championship', href: 'https://youtube.com/@roarbasketball_championship', icon: <Youtube size={24} /> },
-            { name: 'TikTok', handle: 'Roar Basketball Championship', href: 'https://tiktok.com/@roarbasketball_championship', icon: <Music2 size={24} /> },
-            { name: 'Facebook', handle: 'Roar Basketball Championship', href: 'https://facebook.com/roarbasketball_championship', icon: <Facebook size={24} /> },
-        ];
+    // ⚠️ GANTI link dengan akun sosial media asli
+    const socialLinks = [
+        { name: 'Instagram', handle: '@roarbasketball_championship', href: 'https://www.instagram.com/roarbasketball_championship/', icon: <Instagram size={24} /> },
+        { name: 'YouTube', handle: 'Roar Basketball Championship', href: 'https://youtube.com/@roarbasketball_championship', icon: <Youtube size={24} /> },
+        { name: 'TikTok', handle: 'Roar Basketball Championship', href: 'https://tiktok.com/@roarbasketball_championship', icon: <Music2 size={24} /> },
+        { name: 'Facebook', handle: 'Roar Basketball Championship', href: 'https://facebook.com/roarbasketball_championship', icon: <Facebook size={24} /> },
+    ];
 
     return (
         <AppShell variant="header">
@@ -101,7 +238,7 @@ export default function About({ breadcrumbs }: AboutProps) {
                             <div className="hidden md:block"></div>
                             <div className="text-left md:text-right flex flex-col items-start md:items-end justify-center">
                                 <div className="overflow-hidden mb-4">
-                                    <img src="/images/logo/Roar-P.png" className="h-28 md:h-44 w-auto animate-fade-in-up" alt="Logo" />
+                                    <img src="/images/logo/Roar-P.webp" className="h-28 md:h-44 w-auto animate-fade-in-up" alt="Logo" />
                                 </div>
                                 <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter leading-[0.8] text-white mb-6">
                                     ROAR<br />
@@ -180,18 +317,7 @@ export default function About({ breadcrumbs }: AboutProps) {
                     {/* SECTION 3: VIDEO SHOWCASE */}
                     <section id="video-section" className="py-24 bg-slate-900 scroll-mt-20 overflow-hidden">
                         <div className="container mx-auto px-6">
-                            <div className="relative aspect-video rounded-[4rem] overflow-hidden group ring-1 ring-white/10 shadow-2xl cursor-pointer">
-                                <img src="/images/video-thumb.jpg" className="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000" alt="Video Thumbnail" />
-                                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                    <div className="relative">
-                                        <div className="absolute inset-0 bg-orange-500 rounded-full blur-2xl opacity-20 group-hover:opacity-60 animate-pulse"></div>
-                                        <button className="relative bg-orange-500 text-white w-28 h-28 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" aria-label="Putar video">
-                                            <PlayCircle size={60} fill="currentColor" />
-                                        </button>
-                                    </div>
-                                    <span className="mt-8 text-white font-black uppercase tracking-[0.6em] text-[10px] opacity-40 group-hover:opacity-100 transition-opacity">Watch Experience</span>
-                                </div>
-                            </div>
+                            <ReelCarousel />
                         </div>
                     </section>
 
@@ -319,7 +445,7 @@ export default function About({ breadcrumbs }: AboutProps) {
                     {/* SECTION 7: CONTACT + SOSIAL MEDIA */}
                     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
                         <div className="absolute inset-0 z-0">
-                            <img src="/images/home/slide-2.jpg" className="w-full h-full object-cover grayscale" alt="Contact BG" />
+                            <img src="/images/home/slide-2.webp" className="w-full h-full object-cover grayscale" alt="Contact BG" />
                             <div className="absolute inset-0 bg-gradient-to-t from-orange-600/40 via-slate-900/90 to-slate-900"></div>
                         </div>
                         <div className="container mx-auto px-6 md:px-16 relative z-10 mb-32">

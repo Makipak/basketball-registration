@@ -4,6 +4,10 @@ import type { BreadcrumbItem } from '@/types';
 import { useState } from 'react';
 import { Menu, X, UserCircle, LogOut, ArrowRight } from 'lucide-react';
 
+// Ubah ke true untuk menampilkan kembali tombol Login untuk pengunjung.
+// Route /login tetap aktif (admin masih bisa masuk lewat URL langsung).
+const SHOW_LOGIN = false;
+
 interface PageProps {
     auth: {
         user: {
@@ -35,7 +39,7 @@ export function AppHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItem[]
                     
                     {/* LOGO - More compact on mobile */}
                     <Link href="/" className="flex items-center gap-2 md:gap-3 group shrink-0">
-                        <img src="/images/logo/Roar-B.png" alt="Logo Roar Basketball Championship" className="h-8 md:h-10 w-auto object-contain" />
+                        <img src="/images/logo/Roar-B.webp" alt="Logo Roar Basketball Championship" className="h-8 md:h-10 w-auto object-contain" />
                         <span className="text-sm md:text-lg text-black font-black tracking-tighter leading-none uppercase italic">
                             Roar<span className="text-orange-500">basketball</span>
                             <span className="block text-[8px] md:text-[10px] not-italic font-bold tracking-[0.3em] text-black/60 mt-1">Championship</span>
@@ -64,7 +68,7 @@ export function AppHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItem[]
                                 <LogOut size={16} />
                                 Logout
                             </Link>
-                        ) : (
+                        ) : SHOW_LOGIN && (
                             <Link 
                                 href="/login" 
                                 className="hidden lg:flex items-center gap-2 px-3 py-2 text-[10px] font-black text-black uppercase tracking-widest hover:text-orange-500 transition-all"
@@ -101,6 +105,7 @@ export function AppHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItem[]
                     
                     <nav className="relative flex flex-col p-6 gap-4">
                         {/* Primary Mobile Action: Login/Logout */}
+                        {(isLoggedIn || SHOW_LOGIN) && (
                         <div className={`transition-all duration-500 delay-75 ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
                             {isLoggedIn ? (
                                 <Link 
@@ -124,6 +129,7 @@ export function AppHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItem[]
                                 </Link>
                             )}
                         </div>
+                        )}
 
                         {/* Nav Links */}
                         <div className="flex flex-col gap-2 mt-4">

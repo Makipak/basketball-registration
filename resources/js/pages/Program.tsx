@@ -11,21 +11,21 @@ export default function Program({ breadcrumbs }: { breadcrumbs: any }) {
         { 
             title: 'Junior Elite', 
             age: 'U-12 to U-15', 
-            img: '/images/kelas/junior.jpg', 
+            img: '/images/kelas/junior.webp', 
             price: 'Rp 450rb',
             desc: 'Fokus pada pengembangan fundamental dasar dan koordinasi pemain muda.'
         },
         { 
             title: 'Pro Prospect', 
             age: 'U-16 to U-21', 
-            img: '/images/kelas/pro.jpg', 
+            img: '/images/kelas/pro.webp', 
             price: 'Rp 600rb',
             desc: 'Pelatihan intensif tingkat lanjut untuk persiapan kompetisi profesional.'
         },
         { 
             title: 'Private Camp', 
             age: 'All Ages', 
-            img: '/images/kelas/privatecamp.jpg', 
+            img: '/images/kelas/privatecamp.webp', 
             price: 'Mulai 200rb',
             desc: 'Sesi latihan personal 1-on-1 dengan coach untuk detail teknik spesifik.'
         }
