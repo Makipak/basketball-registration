@@ -48,10 +48,14 @@ const dummyPosts: InstagramPost[] = [
 const IG_HANDLE = '@roarbasketball_championship';
 const IG_URL = 'https://www.instagram.com/roarbasketball_championship/';
 
+// `mobilePos` = titik fokus foto di layar HP (object-position: X Y).
+// Di HP kotak hero berbentuk portrait, jadi foto landscape harus dipotong kiri-kanan.
+// X kecil (0%) = fokus ke sisi kiri foto, X besar (100%) = fokus ke sisi kanan foto.
+// ⚠️ Geser angka X sampai pemain terlihat utuh di HP. Desktop tetap center.
 const slides = [
-    '/images/home/slide-1.webp',
-    '/images/home/slide-2.webp',
-    '/images/home/slide-3.webp',
+    { src: '/images/home/slide-1.webp', mobilePos: '92% 50%' }, // pemain dribble di sisi kanan
+    { src: '/images/home/slide-2.webp', mobilePos: '86% 50%' }, // pemain layup di tengah-kanan
+    { src: '/images/home/slide-3.webp', mobilePos: '86% 50%' },
 ];
 
 const facilities = [
@@ -85,22 +89,24 @@ export default function Welcome({ breadcrumbs, instagramPosts }: WelcomeProps) {
                 <div className="min-h-screen overflow-x-hidden bg-slate-50 font-sans text-slate-900 selection:bg-orange-500/30">
 
                     {/* 1. HERO SECTION */}
-                    <section className="relative flex min-h-[85svh] items-center overflow-hidden bg-black pb-24 pt-16 sm:min-h-[90svh] md:min-h-[95svh] md:pb-20 md:pt-0">
+                    {/* Mobile: teks di bagian bawah supaya subjek foto di bagian atas tetap terlihat. Desktop: teks di tengah-kiri. */}
+                    <section className="relative flex min-h-[88svh] items-end overflow-hidden bg-black pb-16 pt-24 sm:min-h-[90svh] sm:pb-20 md:min-h-[95svh] md:items-center md:pb-20 md:pt-0">
                         <div className="absolute inset-0 z-0">
-                            {slides.map((img, index) => (
+                            {slides.map((slide, index) => (
                                 <div
-                                    key={index}
+                                    key={slide.src}
                                     className={`absolute inset-0 transition-[opacity,transform] duration-[1000ms] ease-in-out ${
                                         index === currentSlide ? 'scale-105 opacity-100' : 'scale-100 opacity-0'
                                     }`}
                                 >
                                     <img
-                                        src={img}
-                                        className="h-full w-full object-cover"
+                                        src={slide.src}
+                                        style={{ ['--mobile-pos' as string]: slide.mobilePos }}
+                                        className="h-full w-full object-cover [object-position:var(--mobile-pos)] md:[object-position:center]"
                                         alt={`Slide ${index + 1}`}
                                     />
-                                    {/* Mobile: gelap merata. Desktop: gradient dari kiri */}
-                                    <div className="absolute inset-0 bg-black/60 md:hidden"></div>
+                                    {/* Mobile: gelap hanya di bawah (area teks), foto atas dibiarkan cerah. Desktop: gradient dari kiri */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 via-45% to-black/5 md:hidden"></div>
                                     <div className="absolute inset-0 hidden bg-gradient-to-r from-black/90 via-black/40 to-transparent md:block"></div>
                                 </div>
                             ))}
