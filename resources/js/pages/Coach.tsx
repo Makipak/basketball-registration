@@ -3,58 +3,82 @@ import { AppHeader } from '@/components/app-header';
 import { AppContent } from '@/components/app-content';
 import { Footer } from '@/components/footer';
 import { Head } from '@inertiajs/react';
-import { Instagram, Twitter, Trophy, Zap } from 'lucide-react';
+import { Instagram, Twitter, Trophy } from 'lucide-react';
 
 export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
     const coaches = [
         {
-            name: 'Fictor Roaring',
-            role: 'Head Coach',
-            specialization: 'Tactical Strategy',
-            img: '/images/coach/coach-1.webp',
-            experience: '15+ Years',
-            bio: 'Disiplin bukan pilihan, tapi pondasi. Kami mencetak pemenang, bukan sekadar pemain.'
+            name: 'Fictor Gideon Roring',
+            role: 'Head Coach & Founder',
+            img: '/images/coach/Ito.jpg',
+            bio: 'Memimpin arah kepelatihan dan membangun fondasi Roring Basketball dengan visi dan disiplin.'
         },
         {
-            name: 'M. Gofar',
-            role: 'Jabatan',
-            specialization: 'Skill Development',
-            img: '/images/coach/coach-1.webp',
-            experience: '8 Years',
-            bio: 'Detail kecil di lapangan menentukan perbedaan antara pemain bagus dan pemain hebat.'
+            name: 'Edward Sani',
+            role: 'Coach Lisensi A',
+            img: '/images/coach/Edo.jpg',
+            bio: 'Membina pemain dengan kompetensi kepelatihan tingkat lanjut berlisensi A.'
         },
         {
-            name: 'Faisal J Ahmad',
-            role: 'Jabatan',
-            specialization: 'Mental Toughness',
-            img: '/images/coach/coach-1.webp',
-            experience: '12 Years',
-            bio: 'Mentalitas adalah 90% dari permainan. Jika pikiranmu kuat, tubuhmu akan mengikuti.'
+            name: 'Faisal Julius Achmad',
+            role: 'Coach Lisensi A',
+            img: '/images/coach/Faisal.jpg',
+            bio: 'Membina pemain dengan kompetensi kepelatihan tingkat lanjut berlisensi A.'
         },
         {
             name: 'Amin Prihantono',
-            role: 'Jabatan',
-            specialization: 'Athlete Branding',
-            img: '/images/coach/coach-1.webp',
-            experience: '6 Years',
-            bio: 'Profesionalisme di luar lapangan sama pentingnya dengan performa di dalam ring.'
+            role: 'Coach Lisensi B',
+            img: '/images/coach/Amin.jpg',
+            bio: 'Melatih dan mengembangkan kemampuan pemain dengan bekal lisensi kepelatihan B.'
         },
         {
-            name: 'Fredy L W',
-            role: 'Jabatan',
-            specialization: 'Playmaking & Shooting',
-            img: '/images/coach/coach-1.webp',
-            experience: '10 Years',
-            bio: 'Visi lapangan dan akurasi adalah senjata utama. Kami ajarkan cara membaca permainan.'
+            name: 'Jeanne Yuliana Anggraini',
+            role: 'Coach Lisensi B',
+            img: '/images/coach/Jeanne.jpg',
+            bio: 'Melatih dan mengembangkan kemampuan pemain dengan bekal lisensi kepelatihan B.'
         },
         {
-            name: 'Randy Putrama',
-            role: 'Jabatan',
-            specialization: 'Physicality & Drive',
-            img: '/images/coach/coach-1.webp',
-            experience: '11 Years',
-            bio: 'Kekuatan fisik dan determinasi untuk menyerang paint area adalah kunci kemenangan.'
-        }
+            name: 'Athini Mardlatika El Hasan',
+            role: 'Coach Lisensi B',
+            img: '/images/coach/Tika.jpg',
+            bio: 'Melatih dan mengembangkan kemampuan pemain dengan bekal lisensi kepelatihan B.'
+        },
+        {
+            name: 'Musa Sugih Saroji',
+            role: 'Coach Lisensi B',
+            img: '/images/coach/Musa.jpg',
+            bio: 'Melatih dan mengembangkan kemampuan pemain dengan bekal lisensi kepelatihan B.'
+        },
+        {
+            name: 'Achmad Faraitody Fitrah Ramadhan',
+            role: 'Coach Lisensi B',
+            img: '/images/coach/Ody.jpg',
+            bio: 'Melatih dan mengembangkan kemampuan pemain dengan bekal lisensi kepelatihan B.'
+        },
+        {
+            name: 'Angel Fiolenta',
+            role: 'Coach Lisensi C',
+            img: '/images/coach/Angel.jpg',
+            bio: 'Mendampingi latihan dan pengembangan dasar pemain dengan bekal lisensi kepelatihan C.'
+        },
+        {
+            name: 'Mohamad Gofar',
+            role: 'Coach',
+            img: '/images/coach/Gofar.jpg',
+            bio: 'Mendampingi pemain mengembangkan kemampuan dan pemahaman permainan basket.'
+        },
+        {
+            name: 'Noah',
+            role: 'Coach',
+            img: '/images/coach/Noah.jpg',
+            bio: 'Mendampingi pemain mengembangkan kemampuan dan pemahaman permainan basket.'
+        },
+        {
+            name: 'Tri',
+            role: 'Coach',
+            img: '/images/coach/Tri.jpg',
+            bio: 'Mendampingi pemain mengembangkan kemampuan dan pemahaman permainan basket.'
+        },
     ];
 
     return (
@@ -110,12 +134,6 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
                                             {/* Overlay subtle */}
                                             <div className="absolute inset-0 bg-blue-900/10 lg:group-hover:bg-transparent transition-all duration-500"></div>
 
-                                            {/* Experience Badge */}
-                                            <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 lg:bottom-6 lg:left-6">
-                                                <span className="inline-block bg-orange-500 text-white font-black italic uppercase text-[9px] sm:text-[10px] px-3 py-1.5 sm:px-4 sm:py-2 tracking-widest shadow-2xl">
-                                                    EXP: {coach.experience}
-                                                </span>
-                                            </div>
                                         </div>
 
                                         {/* Content Area */}
@@ -135,13 +153,7 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
                                                 "{coach.bio}"
                                             </p>
 
-                                            <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-3 pt-4 sm:pt-5 lg:pt-6 border-t border-slate-100">
-                                                <div className="flex items-center gap-2 text-slate-900">
-                                                    <Zap size={14} className="text-orange-500 animate-pulse shrink-0" />
-                                                    <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest">
-                                                        {coach.specialization}
-                                                    </span>
-                                                </div>
+                                            <div className="mt-auto flex justify-end gap-1 sm:gap-2 pt-4 sm:pt-5 lg:pt-6 border-t border-slate-100">
                                                 <div className="flex gap-1 sm:gap-2">
                                                     <a
                                                         href="#"
