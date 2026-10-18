@@ -117,7 +117,7 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
                     {/* 2. COACHES LIST */}
                     <section className="py-12 sm:py-16 md:py-24 lg:py-28 xl:py-32 bg-white">
                         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-12 sm:gap-y-14 md:gap-y-16 lg:gap-y-20 xl:gap-y-24 gap-x-6 md:gap-x-8 lg:gap-x-10 xl:gap-x-12">
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-12 sm:gap-y-14 md:gap-y-16 lg:gap-y-20 xl:gap-y-24 gap-x-3 sm:gap-x-6 md:gap-x-8 lg:gap-x-10 xl:gap-x-12">
                                 {coaches.map((coach, idx) => (
                                     <div
                                         key={idx}
@@ -145,7 +145,7 @@ export default function Coach({ breadcrumbs }: { breadcrumbs: any }) {
                                                 </span>
                                             </div>
 
-                                            <h3 className="text-2xl sm:text-[26px] md:text-3xl font-black uppercase italic text-slate-900 leading-none mb-3 sm:mb-4 lg:group-hover:text-[#0056b3] transition-colors break-words">
+                                            <h3 className="text-[clamp(0.75rem,3.5vw,0.875rem)] sm:text-xl md:text-2xl font-black uppercase italic text-slate-900 leading-tight mb-3 sm:mb-4 lg:group-hover:text-[#0056b3] transition-colors break-words">
                                                 {coach.name}
                                             </h3>
 
